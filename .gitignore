@@ -29,3 +29,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### properties file ###
+*.properties
+
+### wrapper ###
+.mvn/wrapper
+!/src/main/resources/application.properties
