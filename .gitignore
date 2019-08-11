@@ -35,3 +35,4 @@ build/
 
 ### wrapper ###
 .mvn/wrapper
+!/src/main/resources/application.properties
