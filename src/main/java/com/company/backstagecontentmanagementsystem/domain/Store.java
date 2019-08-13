@@ -3,25 +3,25 @@ package com.company.backstagecontentmanagementsystem.domain;
 import java.util.Date;
 
 public class Store {
-    private int id;
+    private int storeId;
     private String name;
-    private String logo;
+    private String logo = "";
     private String address;
     private String category;
-    private Date createdTime;
+    private Date createdAt;
     private String description;
     private String phone;
-    private double avgPrice;
-    private String saleFrom;
-    private String saleTo;
+    private String avgPrice = "";
+    private String saleFrom = "";
+    private String saleTo = "";
     private User user;
 
-    public int getId() {
-        return id;
+    public int getStoreId() {
+        return storeId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
     }
 
     public String getName() {
@@ -56,12 +56,12 @@ public class Store {
         this.category = category;
     }
 
-    public Date getCreatedTime() {
-        return createdTime;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
+    public void setCreatedAt(Date createdTime) {
+        this.createdAt = createdAt;
     }
 
     public String getDescription() {
@@ -80,11 +80,11 @@ public class Store {
         this.phone = phone;
     }
 
-    public double getAvgPrice() {
+    public String getAvgPrice() {
         return avgPrice;
     }
 
-    public void setAvgPrice(double avgPrice) {
+    public void setAvgPrice(String avgPrice) {
         this.avgPrice = avgPrice;
     }
 
@@ -115,12 +115,12 @@ public class Store {
     @Override
     public String toString() {
         return "Store{" +
-                "id=" + id +
+                "storeId=" + storeId +
                 ", name='" + name + '\'' +
                 ", logo='" + logo + '\'' +
                 ", address='" + address + '\'' +
                 ", category='" + category + '\'' +
-                ", createdTime=" + createdTime +
+                ", createdAt=" + createdAt +
                 ", description='" + description + '\'' +
                 ", phone='" + phone + '\'' +
                 ", avgPrice=" + avgPrice +
