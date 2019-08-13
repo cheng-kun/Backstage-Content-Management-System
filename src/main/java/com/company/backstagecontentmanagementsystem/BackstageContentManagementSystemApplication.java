@@ -18,5 +18,4 @@ public class BackstageContentManagementSystemApplication extends SpringBootServl
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(BackstageContentManagementSystemApplication.class);
     }
-
 }

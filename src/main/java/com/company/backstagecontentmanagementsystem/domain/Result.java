@@ -71,13 +71,17 @@ public class Result<T> {
 
     @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     public enum ErrorCode {
-        UNKNOWN_ERROR(100, "unknown error"),
-        LOGIN_FAILED(101, "incorrect password"),
-        REPEATED_USERNAME(102, "repeated username"),
-        LOGOUT_FAILED(103, "logout failed"),
-        NOT_LOGIN(104, "not login"),
-        REGISTER_FAILED(105, "register failed"),
-        REPEATED_PHONE(106, "repeated number");
+        UNKNOWN_ERROR(100, "UNKNOWN_ERROR"),
+        LOGIN_FAILED(101, "LOGIN_FAILED"),
+        REPEATED_USERNAME(102, "REPEATED_USERNAME"),
+        LOGOUT_FAILED(103, "LOGOUT_FAILED"),
+        NOT_LOGIN(104, "NOT_LOGIN"),
+        REGISTER_FAILED(105, "REGISTER_FAILED"),
+        REPEATED_PHONE(106, "REPEATED_PHONE"),
+        USER_NOT_EXIST(107, "USER_NOT_EXIST"),
+        CREATE_STORE_FAILED(200, "CREATE_STORE_FAILED"),
+        UPDATE_STORE_FAILED(201,"UPDATE_STORE_FAILED"),
+        QUERY_STORE_FAILED(202,"QUERY_STORE_FAILED");
 
         private int code;
         private String message;
@@ -103,31 +107,4 @@ public class Result<T> {
             this.message = message;
         }
     }
-
-    /*
-    *
-    * {
-    "status": 0,
-    "errorCode": {
-        "code": 101,
-        "message": "repeated username"
-      }
-    }
-    *
-    * */
-
-    /*
-     *
-     * {
-    "status": 1,
-    "data": {
-        "userId": 1,
-        "username": "richie",
-        "lastVisit": 1524144501000,
-        "email": "isuperqiang@gmail.com",
-        "description": ""
-    }
-}
-     *
-     */
 }
