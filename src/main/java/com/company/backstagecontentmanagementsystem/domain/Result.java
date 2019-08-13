@@ -104,31 +104,4 @@ public class Result<T> {
             this.message = message;
         }
     }
-
-    /*
-    *
-    * {
-    "status": 0,
-    "errorCode": {
-        "code": 101,
-        "message": "repeated username"
-      }
-    }
-    *
-    * */
-
-    /*
-     *
-     * {
-    "status": 1,
-    "data": {
-        "userId": 1,
-        "username": "richie",
-        "lastVisit": 1524144501000,
-        "email": "isuperqiang@gmail.com",
-        "description": ""
-    }
-}
-     *
-     */
 }
