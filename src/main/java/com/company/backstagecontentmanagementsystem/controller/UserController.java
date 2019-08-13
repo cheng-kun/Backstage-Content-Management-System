@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @ResponseBody
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public Result logout(@CookieValue(value = Constant.USER_TOKEN, defaultValue = Constant.NULL_TOKEN) String token, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
         HttpSession httpSession = httpServletRequest.getSession(false);
         if(httpSession != null){
@@ -68,8 +68,8 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/query_user", method = RequestMethod.POST)
-    public Result queryUserInfo(@RequestParam("token") String token, HttpServletRequest request) {
+    @PostMapping(value = "/query_user")
+    public Result queryUserInfo(@CookieValue(value = Constant.USER_TOKEN)  String token, HttpServletRequest request) {
         int userId = (int) WebUtils.getSessionAttribute(request, token);
         User user = userService.findUserById(userId);
         if (user != null) {
