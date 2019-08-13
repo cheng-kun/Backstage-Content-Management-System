@@ -77,7 +77,8 @@ public class Result<T> {
         LOGOUT_FAILED(103, "logout failed"),
         NOT_LOGIN(104, "not login"),
         REGISTER_FAILED(105, "register failed"),
-        REPEATED_PHONE(106, "repeated number");
+        REPEATED_PHONE(106, "repeated number"),
+        USER_NOT_EXIST(107, "USER_NOT_EXIST");
 
         private int code;
         private String message;
