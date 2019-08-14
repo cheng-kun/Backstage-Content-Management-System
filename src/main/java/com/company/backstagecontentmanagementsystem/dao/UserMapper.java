@@ -23,7 +23,7 @@ public interface UserMapper {
      * @param password
      * @return
      */
-    void register(@Param("phone") String phone, @Param("password") String password) throws SQLException;
+    int register(@Param("phone") String phone, @Param("password") String password) throws SQLException;
 
     /**
      * @param phone
@@ -40,7 +40,7 @@ public interface UserMapper {
     /**
      * @param userId last
      */
-    void updateVisitTime(@Param("user_id") int userId) throws SQLException;
+    int updateVisitTime(@Param("user_id") int userId) throws SQLException;
 
     /**
      * @return
