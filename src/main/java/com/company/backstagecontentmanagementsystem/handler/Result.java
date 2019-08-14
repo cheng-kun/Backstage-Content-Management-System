@@ -1,4 +1,4 @@
-package com.company.backstagecontentmanagementsystem.domain;
+package com.company.backstagecontentmanagementsystem.handler;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -81,7 +81,11 @@ public class Result<T> {
         USER_NOT_EXIST(107, "USER_NOT_EXIST"),
         CREATE_STORE_FAILED(200, "CREATE_STORE_FAILED"),
         UPDATE_STORE_FAILED(201,"UPDATE_STORE_FAILED"),
-        QUERY_STORE_FAILED(202,"QUERY_STORE_FAILED");
+        QUERY_STORE_FAILED(202,"QUERY_STORE_FAILED"),
+        CREATE_CATEGORY_FAILED(300, "CREATE_CATEGORY_FAILED"),
+        UPDATE_CATEGORY_FAILED(301, "UPDATE_CATEGORY_FAILED"),
+        DELETE_CATEGORY_FAILED(302, "DELETE_CATEGORY_FAILED"),
+        QUERY_CATEGORY_FAILED(304, "QUERY_CATEGORY_FAILED");
 
         private int code;
         private String message;
