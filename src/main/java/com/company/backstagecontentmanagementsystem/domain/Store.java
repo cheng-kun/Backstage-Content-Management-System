@@ -125,8 +125,8 @@ public class Store {
                 ", phone='" + phone + '\'' +
                 ", avgPrice=" + avgPrice +
                 ", saleFrom='" + saleFrom + '\'' +
-                ", saleTo='" + saleTo +
-                ", user='" + user +
+                ", saleTo='" + saleTo + '\'' +
+                ", user=" + user +
                 '}';
     }
 }
