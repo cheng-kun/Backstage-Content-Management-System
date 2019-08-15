@@ -1,8 +1,12 @@
 package com.company.backstagecontentmanagementsystem.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Category {
+public class Category implements Serializable {
+
+    private static final long serialVersionUID = 2564819842148317353L;
+
     private int catId;
     private String name;
     private Date createdAt;
