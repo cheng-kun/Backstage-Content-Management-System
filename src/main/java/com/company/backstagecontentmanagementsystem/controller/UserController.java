@@ -2,7 +2,7 @@ package com.company.backstagecontentmanagementsystem.controller;
 
 
 import com.company.backstagecontentmanagementsystem.config.Constant;
-import com.company.backstagecontentmanagementsystem.domain.Result;
+import com.company.backstagecontentmanagementsystem.handler.Result;
 import com.company.backstagecontentmanagementsystem.domain.User;
 import com.company.backstagecontentmanagementsystem.service.UserService;
 import com.company.backstagecontentmanagementsystem.util.ApiUtils;
@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
     private UserService userService;

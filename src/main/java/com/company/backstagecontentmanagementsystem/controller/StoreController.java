@@ -1,7 +1,7 @@
 package com.company.backstagecontentmanagementsystem.controller;
 
 import com.company.backstagecontentmanagementsystem.config.Constant;
-import com.company.backstagecontentmanagementsystem.domain.Result;
+import com.company.backstagecontentmanagementsystem.handler.Result;
 import com.company.backstagecontentmanagementsystem.domain.Store;
 import com.company.backstagecontentmanagementsystem.domain.User;
 import com.company.backstagecontentmanagementsystem.service.StoreService;
@@ -34,7 +34,7 @@ public class StoreController {
 
     @ResponseBody
     @PostMapping("/create")
-    public Result createStore(@RequestBody Store store, @CookieValue(value = Constant.USER_TOKEN) String token,
+    public Result createStore(@RequestBody Store store, @CookieValue(Constant.USER_TOKEN) String token,
                               HttpServletRequest request) {
         int userId = (int) WebUtils.getSessionAttribute(request, token);
         logger.info("token:{}, userId:{}", token, userId);
@@ -51,7 +51,7 @@ public class StoreController {
 
     @ResponseBody
     @PostMapping("/update")
-    public Result updateStore(@RequestBody Store store, @CookieValue(value = Constant.USER_TOKEN) String token,
+    public Result updateStore(@RequestBody Store store, @CookieValue(Constant.USER_TOKEN) String token,
                               HttpServletRequest request) {
         int userId = (int) WebUtils.getSessionAttribute(request, token);
         logger.info("token:{}, userId:{}", token, userId);
@@ -66,7 +66,7 @@ public class StoreController {
 
     @ResponseBody
     @PostMapping("/query")
-    public Result queryStory(@CookieValue(value = Constant.USER_TOKEN) String token,
+    public Result queryStory(@CookieValue(Constant.USER_TOKEN) String token,
                              HttpServletRequest request) {
         int userId = (int) WebUtils.getSessionAttribute(request, token);
         logger.info("token:{}, userId:{}", token, userId);

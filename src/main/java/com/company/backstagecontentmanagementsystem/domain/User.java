@@ -1,8 +1,11 @@
 package com.company.backstagecontentmanagementsystem.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 5492233803946852601L;
 
     private int userId;
     private String username;

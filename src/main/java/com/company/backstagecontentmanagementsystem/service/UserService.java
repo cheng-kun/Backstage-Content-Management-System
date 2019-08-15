@@ -36,8 +36,8 @@ public class UserService {
 
     public boolean register(String phone, String password) {
         try {
-            userMapper.register(phone, MD5Utils.encode(password));
-            return true;
+            int affected = userMapper.register(phone, MD5Utils.encode(password));
+            return affected > 0;
         } catch (SQLException e) {
             logger.error("register failed", e);
             return false;

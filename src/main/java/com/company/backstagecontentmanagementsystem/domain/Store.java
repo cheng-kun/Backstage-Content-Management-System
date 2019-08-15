@@ -1,8 +1,12 @@
 package com.company.backstagecontentmanagementsystem.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Store {
+public class Store implements Serializable {
+
+    private static final long serialVersionUID = -5668580332970818722L;
+
     private int storeId;
     private String name;
     private String logo = "";
@@ -125,8 +129,8 @@ public class Store {
                 ", phone='" + phone + '\'' +
                 ", avgPrice=" + avgPrice +
                 ", saleFrom='" + saleFrom + '\'' +
-                ", saleTo='" + saleTo +
-                ", user='" + user +
+                ", saleTo='" + saleTo + '\'' +
+                ", user=" + user +
                 '}';
     }
 }
