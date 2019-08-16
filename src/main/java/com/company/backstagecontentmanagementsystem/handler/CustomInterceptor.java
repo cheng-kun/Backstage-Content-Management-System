@@ -26,11 +26,13 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
             if (Constant.NULL_TOKEN.equals(token) || !ApiUtils.checkLogin(token, request)) {
                 logger.debug("not login, redirect");
                 //httpServletResponse.sendRedirect("/blog/login.html");
+                response.sendRedirect("/login.html");
                 return false;
             }
         } else {
             logger.debug("not login, redirect");
             //httpServletResponse.sendRedirect("/blog/login.html");
+            response.sendRedirect("/login.html");
             return false;
         }
         return true;
@@ -38,11 +40,11 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-        logger.debug("postHandle");
+        logger.debug("postHandle " + httpServletRequest.getRequestURI());
     }
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-        logger.debug("afterCompletion");
+        logger.debug("afterCompletion " + httpServletRequest.getRequestURL());
     }
 }
