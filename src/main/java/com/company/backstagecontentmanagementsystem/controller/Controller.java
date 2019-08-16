@@ -15,4 +15,19 @@ public class Controller {
         return "hello, world";
     }
 
+    @GetMapping(value = "/login.html")
+    public String loginPage() {
+        return "login";
+    }
+
+    @GetMapping(value = "/register.html")
+    public String registerPage() {
+        return "register";
+    }
+
+    @GetMapping(value = "/goods_main.html")
+    public String goodsMain() {
+        return "goods_main";
+    }
+
 }
