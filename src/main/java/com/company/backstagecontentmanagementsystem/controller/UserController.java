@@ -29,15 +29,12 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public Result login(@RequestParam("phone") String phone, @RequestParam("password") String password, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        User user = userService.login(phone, password);
+    public Result login(@RequestBody User u, HttpServletResponse httpServletResponse, HttpSession httpSession) {
+        User user = userService.login(u.getPhone(), u.getPassword());
         if (user != null) {
-            HttpSession httpSession = httpServletRequest.getSession();
-            int expiry = 3600*24;
             String uuid = ApiUtils.getUUID();
-            httpSession.setMaxInactiveInterval(expiry);
             httpSession.setAttribute(uuid, user.getUserId());
-
+            int expiry = 3600*24;
             Cookie cookie = new Cookie(Constant.USER_TOKEN, uuid);
             cookie.setMaxAge(expiry);
             cookie.setPath("/");
@@ -50,8 +47,7 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/logout")
-    public Result logout(@CookieValue(value = Constant.USER_TOKEN, defaultValue = Constant.NULL_TOKEN) String token, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
-        HttpSession httpSession = httpServletRequest.getSession(false);
+    public Result logout(@CookieValue(value = Constant.USER_TOKEN, defaultValue = Constant.NULL_TOKEN) String token, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, HttpSession httpSession){
         if(httpSession != null){
             httpSession.removeAttribute(token);
         }

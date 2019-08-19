@@ -5,6 +5,8 @@ import com.company.backstagecontentmanagementsystem.domain.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -20,6 +22,7 @@ public class CategoryService {
         this.categoryMapper = categoryMapper;
     }
 
+    @CacheEvict(value = "deleteCat", key = "'all_categories'")
     public boolean createCategory(String name, int userId) {
         Integer maxSeq = categoryMapper.queryMaxSeq(userId);
         if (maxSeq == null) {
@@ -34,6 +37,7 @@ public class CategoryService {
         return false;
     }
 
+    @CacheEvict(value = "deleteCat", key = "'all_categories'")
     public boolean updateCategory(Category category) {
         try {
             int affected = categoryMapper.updateCategory(category.getName(), category.getSequence(), category.getCatId());
@@ -44,6 +48,7 @@ public class CategoryService {
         return false;
     }
 
+    @CacheEvict(value = "deleteCat", key = "'all_categories'")
     public boolean deleteCategory(int catId) {
         try {
             int affected = categoryMapper.deleteCategory(catId);
@@ -54,6 +59,7 @@ public class CategoryService {
         return false;
     }
 
+    @Cacheable(value = "queryAllCat", key = "'all_categories'")
     public List<Category> queryAllCategories(int userId) {
         return categoryMapper.queryAllCategories(userId);
     }
