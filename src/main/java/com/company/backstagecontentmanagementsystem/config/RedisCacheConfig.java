@@ -3,19 +3,20 @@ package com.company.backstagecontentmanagementsystem.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.cache.interceptor.SimpleKeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.lang.reflect.Method;
-
 @Configuration
 @EnableCaching
 public class RedisCacheConfig extends CachingConfigurerSupport {
@@ -47,6 +48,13 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
     }
 
     @Bean
+    public CacheManager cacheManager(RedisTemplate<String, Object> redisTemplate) {
+        RedisCacheManager rcm = new RedisCacheManager(redisTemplate);
+        rcm.setDefaultExpiration(60 * 60 * 60);
+        return rcm;
+    }
+
+    @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
         return new JedisConnectionFactory();
     }
@@ -68,13 +76,5 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
         template.afterPropertiesSet();
         return template;
     }
-
-
-/*    @Bean
-    public CacheManager cacheManager(RedisTemplate<String, Object> redisTemplate) {
-        RedisCacheManager rcm = new RedisCacheManager(redisTemplate);
-        rcm.setDefaultExpiration(60 * 60 * 60);
-        return rcm;
-    }*/
 
 }
