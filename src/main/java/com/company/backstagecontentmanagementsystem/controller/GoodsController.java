@@ -6,6 +6,7 @@ import com.company.backstagecontentmanagementsystem.domain.User;
 import com.company.backstagecontentmanagementsystem.handler.Result;
 import com.company.backstagecontentmanagementsystem.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
