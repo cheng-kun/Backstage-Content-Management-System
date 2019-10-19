@@ -2,8 +2,10 @@ package com.company.backstagecontentmanagementsystem.controller;
 
 
 import com.company.backstagecontentmanagementsystem.config.Constant;
-import com.company.backstagecontentmanagementsystem.handler.Result;
+import com.company.backstagecontentmanagementsystem.domain.Store;
 import com.company.backstagecontentmanagementsystem.domain.User;
+import com.company.backstagecontentmanagementsystem.handler.Result;
+import com.company.backstagecontentmanagementsystem.service.StoreService;
 import com.company.backstagecontentmanagementsystem.service.UserService;
 import com.company.backstagecontentmanagementsystem.util.ApiUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,73 +23,88 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     private UserService userService;
+    private StoreService storeService;
+
+    @Autowired
+    public void setStoreService(StoreService storeService) {
+        this.storeService = storeService;
+    }
 
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
+    // {"phone":"15868825645","password":"123456"}
     @PostMapping("/login")
     @ResponseBody
-    public Result login(@RequestBody User u, HttpServletResponse httpServletResponse, HttpSession httpSession) {
+    public Result login(@RequestBody User u,
+                        HttpServletResponse response, HttpSession httpSession) {
         User user = userService.login(u.getPhone(), u.getPassword());
         if (user != null) {
             String uuid = ApiUtils.getUUID();
             httpSession.setAttribute(uuid, user.getUserId());
-            int expiry = 3600*24;
+
+            int expiry = 3600 * 24;
             Cookie cookie = new Cookie(Constant.USER_TOKEN, uuid);
-            cookie.setMaxAge(expiry);
+            cookie.setMaxAge(expiry); // 单位 秒
             cookie.setPath("/");
-            httpServletResponse.addCookie(cookie);
+            response.addCookie(cookie);
+
+            Store store = storeService.queryStore(user.getUserId());
+            Cookie cookieStore = new Cookie("store-name", store.getName());
+            cookieStore.setMaxAge(expiry);
+            cookieStore.setPath("/");
+            response.addCookie(cookieStore);
             return Result.createYesResult(uuid);
         } else {
             return Result.createNoResult(Result.ErrorCode.LOGIN_FAILED);
         }
     }
 
+    @PostMapping("/register")
+    @ResponseBody
+    public Result register(@RequestBody User user) {
+        boolean registered = userService.isRegistered(user.getPhone());
+        if (registered) {
+            return Result.createNoResult(Result.ErrorCode.REPEATED_PHONE);
+        } else {
+            if (userService.register(user.getPhone(), user.getPassword())) {
+                return Result.createYesResult();
+            } else {
+                return Result.createNoResult(Result.ErrorCode.REGISTER_FAILED);
+            }
+        }
+    }
+
     @ResponseBody
     @PostMapping("/logout")
-    public Result logout(@CookieValue(value = Constant.USER_TOKEN, defaultValue = Constant.NULL_TOKEN) String token, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, HttpSession httpSession){
-        if(httpSession != null){
+    public Result logout(@CookieValue(value = Constant.USER_TOKEN, defaultValue = Constant.NULL_TOKEN) String token,
+                         HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
+        if (httpSession != null) {
             httpSession.removeAttribute(token);
         }
-
-        Cookie[] cookies = httpServletRequest.getCookies();
-        for (Cookie cookie:cookies){
-            if (Constant.USER_TOKEN.equals(cookie.getName())){
-                Cookie cookie1 = new Cookie(cookie.getName(),"");
-                cookie1.setMaxAge(0);
-                cookie1.setPath("/");
-                httpServletResponse.addCookie(cookie1);
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (Constant.USER_TOKEN.equals(cookie.getName())) {
+                Cookie c = new Cookie(cookie.getName(), "");
+                c.setMaxAge(0);
+                c.setPath("/");
+                response.addCookie(c);
             }
         }
         return Result.createYesResult();
     }
 
     @ResponseBody
-    @PostMapping(value = "/query_user")
-    public Result queryUserInfo(@CookieValue(value = Constant.USER_TOKEN)  String token, HttpServletRequest request) {
+    @PostMapping(value = "/query")
+    public Result queryUserInfo(@CookieValue(value = Constant.USER_TOKEN) String token, HttpServletRequest request) {
         int userId = (int) WebUtils.getSessionAttribute(request, token);
         User user = userService.findUserById(userId);
         if (user != null) {
             return Result.createYesResult(user);
         } else {
             return Result.createNoResult(Result.ErrorCode.USER_NOT_EXIST);
-        }
-    }
-
-    @PostMapping("/register")
-    @ResponseBody
-    public Result register(@RequestParam("phone") String phone, @RequestParam("password") String password) {
-        boolean registered = userService.isRegistered(phone);
-        if (registered) {
-            return Result.createNoResult(Result.ErrorCode.REPEATED_PHONE);
-        } else {
-            if (userService.register(phone, password)) {
-                return Result.createYesResult();
-            } else {
-                return Result.createNoResult(Result.ErrorCode.REGISTER_FAILED);
-            }
         }
     }
 }
