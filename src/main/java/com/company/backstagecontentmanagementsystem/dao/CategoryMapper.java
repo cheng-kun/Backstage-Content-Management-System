@@ -12,24 +12,23 @@ import java.util.List;
 @Repository
 public interface CategoryMapper {
     /**
-     * @param name
-     * @param seq
-     * @param userId
-     * @return primary key
-     * @throws SQLException
-     */
-    int createCategory(@Param("name") String name, @Param("sequence") int seq, @Param("user_id") int userId) throws SQLException;
-
-    /**
-     * @param name
-     * @param seq
-     * @param catId
+     *
+     * @param category
      * @return affected rows
      * @throws SQLException
      */
-    int updateCategory(@Param("name") String name, @Param("sequence") int seq, @Param("cat_id") int catId) throws SQLException;
+    int createCategory(@Param("category") Category category) throws SQLException;
 
     /**
+     *
+     * @param category
+     * @return affected rows
+     * @throws SQLException
+     */
+    int updateCategory(@Param("category") Category category) throws SQLException;
+
+    /**
+     *
      * @param catId
      * @return affected rows
      * @throws SQLException
@@ -37,14 +36,34 @@ public interface CategoryMapper {
     int deleteCategory(@Param("cat_id") int catId) throws SQLException;
 
     /**
+     *
+     * @param name
+     * @param pageIndex
+     * @param pageSize
      * @param userId
      * @return
      */
-    List<Category> queryAllCategories(@Param("user_id") int userId);
+    List<Category> queryCategoryByPage(@Param("name") String name, @Param("page_index") int pageIndex,
+                                       @Param("page_size") int pageSize, @Param("user_id") int userId);
 
     /**
+     *
      * @param userId
      * @return
      */
     Integer queryMaxSeq(@Param("user_id") int userId);
+
+    /**
+     *
+     * @param userId
+     * @return
+     */
+    int queryCatCount(@Param("user_id") int userId);
+
+    /**
+     *
+     * @param name
+     * @return
+     */
+    Integer queryCatIdByName(@Param("name") String name);
 }
