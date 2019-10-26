@@ -23,9 +23,8 @@ public class StoreService {
 
     public boolean createStore(Store store) {
         try {
-            int affected = storeMapper.createStore(store.getName(), store.getLogo(), store.getAddress(), store.getCategory(), store.getDescription(),
-                    store.getPhone(), store.getAvgPrice(), store.getSaleFrom(), store.getSaleTo(), store.getUser().getUserId());
-            return affected > 0;
+            int key = storeMapper.createStore(store);
+            return key > 0;
         } catch (SQLException e) {
             logger.error("create store failed", e);
         }
@@ -35,13 +34,23 @@ public class StoreService {
     @CacheEvict(value = "updateStore", key = "'storeInfo'")
     public boolean updateStore(Store store) {
         try {
-           int affected = storeMapper.updateStore(store.getName(), store.getLogo(), store.getAddress(), store.getCategory(), store.getDescription(),
-                    store.getPhone(), store.getAvgPrice(), store.getSaleFrom(), store.getSaleTo(), store.getUser().getUserId());
+            int affected = storeMapper.updateStore(store);
             return affected > 0;
         } catch (SQLException e) {
             logger.error("update store failed", e);
         }
         return false;
+    }
+
+    @CacheEvict(value = "updateStore", key = "'storeInfo'")
+    public boolean updateStoreLogo(int storeId, String logo) {
+        int affected = 0;
+        try {
+            affected = storeMapper.updateStoreLogo(storeId, logo);
+        } catch (SQLException e) {
+            logger.error("update store failed", e);
+        }
+        return affected > 0;
     }
 
     @Cacheable(value = "queryStore", key = "'storeInfo'")
