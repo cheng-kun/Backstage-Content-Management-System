@@ -13,6 +13,13 @@ public class Category implements Serializable {
     private int sequence;
     private User user;
 
+    public Category() {
+    }
+
+    public Category(int catId) {
+        this.catId = catId;
+    }
+
     public int getCatId() {
         return catId;
     }
