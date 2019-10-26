@@ -3,7 +3,7 @@ package com.company.backstagecontentmanagementsystem.controller;
 import com.company.backstagecontentmanagementsystem.config.Constant;
 import com.company.backstagecontentmanagementsystem.domain.Member;
 import com.company.backstagecontentmanagementsystem.domain.User;
-import com.company.backstagecontentmanagementsystem.handler.Result;
+import com.company.backstagecontentmanagementsystem.response.Result;
 import com.company.backstagecontentmanagementsystem.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
