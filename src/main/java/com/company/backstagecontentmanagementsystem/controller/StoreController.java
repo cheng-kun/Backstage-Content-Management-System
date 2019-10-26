@@ -3,7 +3,7 @@ package com.company.backstagecontentmanagementsystem.controller;
 import com.company.backstagecontentmanagementsystem.config.Constant;
 import com.company.backstagecontentmanagementsystem.domain.Store;
 import com.company.backstagecontentmanagementsystem.domain.User;
-import com.company.backstagecontentmanagementsystem.handler.Result;
+import com.company.backstagecontentmanagementsystem.response.Result;
 import com.company.backstagecontentmanagementsystem.service.StoreService;
 import com.company.backstagecontentmanagementsystem.service.UserService;
 import org.slf4j.Logger;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

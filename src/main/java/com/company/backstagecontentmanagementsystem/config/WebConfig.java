@@ -1,6 +1,6 @@
 package com.company.backstagecontentmanagementsystem.config;
 
-import com.company.backstagecontentmanagementsystem.handler.CustomInterceptor;
+import com.company.backstagecontentmanagementsystem.response.CustomInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

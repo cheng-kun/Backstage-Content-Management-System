@@ -1,4 +1,4 @@
-package com.company.backstagecontentmanagementsystem.handler;
+package com.company.backstagecontentmanagementsystem.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

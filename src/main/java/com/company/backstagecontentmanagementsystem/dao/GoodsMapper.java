@@ -14,44 +14,21 @@ public interface GoodsMapper {
 
     /**
      *
-     * @param name
-     * @param picture
-     * @param specification
-     * @param price
-     * @param stock
-     * @param saleVolume
-     * @param cost
-     * @param catId
-     * @param userId
+     * @param goods
      * @return
      * @throws SQLException
      */
-    int createGoods(@Param("name") String name, @Param("picture") String picture, @Param("specification") String specification,
-                    @Param("price") double price, @Param("stock") int stock, @Param("sale_volume") int saleVolume,
-                    @Param("cost") double cost, @Param("cat_id") int catId, @Param("user_id") int userId) throws SQLException;
+    int createGoods(@Param("goods") Goods goods) throws SQLException;
 
     /**
      *
-     * @param name
-     * @param picture
-     * @param specification
-     * @param price
-     * @param stock
-     * @param saleVolume
-     * @param cost
-     * @param onSale
-     * @param catId
-     * @param goodsId
+     * @param goods
      * @return
      * @throws SQLException
      */
-    int updateGoods(@Param("name") String name, @Param("picture") String picture, @Param("specification") String specification,
-                    @Param("price") double price, @Param("stock") int stock, @Param("sale_volume") int saleVolume,
-                    @Param("cost") double cost, @Param("on_sale") boolean onSale, @Param("cat_id") int catId,
-                    @Param("goods_id") int goodsId) throws SQLException;
+    int updateGoods(@Param("goods") Goods goods) throws SQLException;
 
     /**
-     * 删除商品
      *
      * @param goodsId
      * @return
@@ -68,10 +45,63 @@ public interface GoodsMapper {
 
     /**
      *
+     * @param name
      * @param pageIndex
      * @param pageSize
      * @param userId
      * @return
      */
-    List<Goods> queryGoodsByPage(@Param("page_index") int pageIndex, @Param("page_size") int pageSize, @Param("user_id") int userId);
+    List<Goods> queryGoodsByPage(@Param("name") String name, @Param("page_index") int pageIndex, @Param("page_size") int pageSize, @Param("user_id") int userId);
+
+    /**
+     *
+     * @param sale
+     * @param pageIndex
+     * @param pageSize
+     * @param userId
+     * @return
+     */
+    List<Goods> queryGoodsByPageSale(@Param("sale") int sale, @Param("page_index") int pageIndex, @Param("page_size") int pageSize, @Param("user_id") int userId);
+
+    /**
+     *
+     * @param userId
+     * @return
+     */
+    int queryCount(@Param("user_id") int userId);
+
+    /**
+     *
+     * @param sale
+     * @param userId
+     * @return
+     */
+    int queryCountBySale(@Param("sale") int sale, @Param("user_id") int userId);
+
+    /**
+     *
+     * @param goodsId
+     * @param picture
+     * @return
+     * @throws SQLException
+     */
+    int updateGoodsImage(@Param("goods_id") int goodsId, @Param("picture") String picture) throws SQLException;
+
+    /**
+     *
+     * @param goodsId
+     * @param stock
+     * @return
+     * @throws SQLException
+     */
+    int increaseStock(@Param("goods_id") int goodsId, @Param("stock") int stock) throws SQLException;
+
+    /**
+     *
+     * @param goodsId
+     * @param sale
+     * @return
+     * @throws SQLException
+     */
+    int changeSale(@Param("goods_id") int goodsId, @Param("sale") boolean sale) throws SQLException;
 }

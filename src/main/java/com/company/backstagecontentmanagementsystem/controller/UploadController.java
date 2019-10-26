@@ -1,6 +1,6 @@
 package com.company.backstagecontentmanagementsystem.controller;
 
-import com.company.backstagecontentmanagementsystem.handler.Result;
+import com.company.backstagecontentmanagementsystem.response.Result;
 import com.company.backstagecontentmanagementsystem.service.GoodsService;
 import com.company.backstagecontentmanagementsystem.service.StoreService;
 import com.company.backstagecontentmanagementsystem.util.ApiUtils;
