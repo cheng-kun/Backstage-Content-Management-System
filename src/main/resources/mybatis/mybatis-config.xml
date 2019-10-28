@@ -22,10 +22,10 @@
         <typeAlias alias="LinkedHashMap" type="java.util.LinkedHashMap"/>
         <typeAlias alias="ArrayList" type="java.util.ArrayList"/>
         <typeAlias alias="LinkedList" type="java.util.LinkedList"/>
-        <typeAlias alias="User" type="com.company.backstagecontentmanagementsystem.domain.User"/>
-        <typeAlias alias="Store" type="com.company.backstagecontentmanagementsystem.domain.Store"/>
-        <typeAlias alias="Category" type="com.backstagecontentmanagementsystem.backstage.domain.Category"/>
-        <typeAlias alias="Goods" type="com.backstagecontentmanagementsystem.backstage.domain.Goods"/>
+        <typeAlias alias="User" type="com.richie.backstage.domain.User"/>
+        <typeAlias alias="Store" type="com.richie.backstage.domain.Store"/>
+        <typeAlias alias="Category" type="com.richie.backstage.domain.Category"/>
+        <typeAlias alias="Goods" type="com.richie.backstage.domain.Goods"/>
+        <typeAlias alias="Member" type="com.richie.backstage.domain.Member"/>
     </typeAliases>
-
 </configuration>
