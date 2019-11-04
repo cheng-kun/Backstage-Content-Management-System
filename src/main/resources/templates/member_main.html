@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <title>商家管理后台</title>
+
+    <link rel="stylesheet" th:href="@{/static/res/layui/css/layui.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/static/css/user.css}"/>
+    <script type="text/javascript" th:src="@{/static/res/layui/layui.js}" charset="utf-8"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script th:src="@{/static/js/jquery.cookie.js}"></script>
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">商家后台管理系统</div>
+        <div class="div_center"><h2 class="nav_title">世纪华联</h2></div>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree">
+                <li class="layui-nav-item">
+                    <a href="goods_main.html">商品管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="category_main.html">分类管理</a>
+                </li>
+                <li class="layui-nav-item layui-this layui-nav-itemed">
+                    <a href="member_main.html">会员管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="store_main.html">店铺设置</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body main_body">
+        <!-- 内容主体区域 -->
+        <h1>会员管理</h1>
+        <hr/>
+        <div>
+            <div class="layui-form-item" style="margin-top: 20px">
+                <label class="layui-form-label">会员名称</label>
+                <div class="layui-input-inline">
+                    <input id='text_input_name' type="text" name="nickname" lay-verify="required" autocomplete="off"
+                           class="layui-input input_box" placeholder="请输入会员名称"/>
+                </div>
+                <div class="layui-input-inline" style="margin-left: 40px">
+                    <button id="btn_query" class="layui-btn">查询</button>
+                </div>
+
+            </div>
+
+            <button id="btn_delete" data-type="deleteMembers" class="layui-btn">删除</button>
+            <button id="btn_add" class="layui-btn">添加</button>
+
+            <script type="text/html" id="member_operation">
+                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            </script>
+
+            <table class="layui-hide" id="member" lay-filter="member_list"></table>
+
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        <div style="text-align: center">
+            <a href="https://isuperqiang.github.io" target="_blank">© 落英坠露</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    var name = $.cookie('store-name');
+    $('.nav_title').text(name);
+
+    layui.use('layer');
+
+    layui.use('table', function () {
+        var table = layui.table;
+
+        var $ = layui.$, active = {
+            deleteMembers: function () { //获取选中数据
+                var checkStatus = table.checkStatus('render_members')
+                    , data = checkStatus.data;
+                if (data.length == 0) {
+                    layer.msg('请选择会员');
+                } else {
+                    layer.confirm('确定删除这些会员？', function () {
+                        var da = JSON.stringify(data);
+                        console.log('da' + da);
+                        $.ajax({
+                            type: "post",
+                            url: "/member/delete_bundle",
+                            async: true, // 异步处理
+                            dataType: "json", // 预期的服务器响应的数据类型。
+                            data: da, // 	规定要发送到服务器的数据
+                            contentType: 'application/json',
+                            success: function () {
+                                layer.msg('删除成功', {icon: 6});
+                                table.reload('render_members', {
+                                    page: {
+                                        curr: 1
+                                    }
+                                });
+                            },
+                            error: function () {
+                                layer.msg('请求失败', {icon: 5})
+                            }
+                        });
+                    });
+                }
+            }
+        };
+
+        $('#btn_delete').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+        //监听工具条
+        table.on('tool(member_list)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'del') {
+                var d = {'memberId': data.memberId};
+                layer.confirm('确定删除该会员？', function (index) {
+                    $.ajax({
+                        type: "post",
+                        url: "/member/delete",
+                        async: true, // 异步处理
+                        dataType: "json", // 预期的服务器响应的数据类型。
+                        data: JSON.stringify(d), // 	规定要发送到服务器的数据
+                        contentType: 'application/json',
+                        success: function (result) {
+                            console.log('delete succeed: ' + result);
+                            if (result.status == 1) {
+                                layer.msg('删除成功', {icon: 6});
+                                obj.del();
+                                layer.close(index);
+                            } else {
+                                layer.msg(result.errorCode.message, {icon: 5})
+                            }
+                        },
+                        error: function () {
+                            layer.msg('请求失败', {icon: 5})
+                        }
+                    });
+                });
+            } else if (obj.event === 'edit') {
+                location.href = '/member_edit?member_id=' + data.memberId;
+            }
+        });
+
+        table.render({
+            elem: '#member'
+            , url: '/member/query'
+            , cellMinWidth: 80
+            , method: 'post'
+            , cols: [
+                [
+                    {type: 'checkbox'}
+                    , {field: 'memberId', title: 'ID', width: 100, unresize: true, sort: true}
+                    , {field: 'nickname', title: '名称'}
+                    , {field: 'gender', title: '性别', width: 200}
+                    , {field: 'phone', title: '手机号', width: 200}
+                    , {field: 'credit', title: '积分', width: 200}
+                    , {field: 'cardNo', title: '卡号', width: 200}
+                    , {field: 'createdAt', title: '创建时间', width: 200}
+                    , {fixed: 'right', title: '操作', width: 200, align: 'center', toolbar: '#member_operation'},
+                ]]
+            , response: {
+                dataName: 'list',
+                countName: 'count',
+                statusCode: '1',
+                statusName: 'status'
+            }
+            , request: {
+                pageName: 'page_index',
+                limitName: 'page_size'
+            }
+            , page: true
+            , id: 'render_members'
+        });
+
+        // 查询按钮
+        $('#btn_query').on('click', function () {
+            var text = $('#text_input_name').val();
+            table.reload('render_members', {
+                where: {
+                    'nickname': text
+                }
+                , page: {
+                    curr: 1
+                }
+            });
+        });
+
+        // 添加按钮
+        $('#btn_add').on('click', function () {
+            location.href = '/member_new.html';
+        });
+    });
+
+    function logout() {
+        layer.confirm('确定退出登录？', function () {
+            $.ajax({
+                type: "post",
+                url: "/user/logout",
+                async: true, // 异步处理
+                dataType: "json", // 预期的服务器响应的数据类型。
+                data: JSON.stringify('{}'), // 	规定要发送到服务器的数据
+                contentType: 'application/json',
+                success: function (result) {
+                    console.log('logout succeed: ' + result);
+                    if (result.status == 1) {
+                        location.href = '/login.html';
+                    } else {
+                        layer.msg(result.errorCode.message, {icon: 5})
+                    }
+                },
+                error: function () {
+                    layer.msg('请求失败', {icon: 5})
+                }
+            });
+        });
+    }
+</script>
+
+</body>
+</html>
+

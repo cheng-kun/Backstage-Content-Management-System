@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <title>商家管理后台</title>
+    <link rel="stylesheet" th:href="@{/static/res/layui/css/layui.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/static/css/user.css}"/>
+    <script type="text/javascript" th:src="@{/static/res/layui/layui.js}" charset="utf-8"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script th:src="@{/static/js/jquery.cookie.js}"></script>
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">商家后台管理系统</div>
+        <div class="div_center"><h2 class="nav_title">世纪华联</h2></div>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree">
+                <li class="layui-nav-item layui-this layui-nav-itemed">
+                    <a href="goods_main.html">商品管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="category_main.html">分类管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="member_main.html">会员管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="store_edit.html">店铺设置</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body main_body">
+        <a href="goods_main.html">
+            <i class="layui-icon" style="font-size: 24px">&#xe65c;</i>
+        </a>
+
+        <hr/>
+        <!-- 内容主体区域 -->
+        <h1>创建商品</h1>
+        <hr/>
+        <div>
+            <form class="layui-form" action="">
+                <div class="layui-form-item" style="margin-top: 20px">
+                    <label class="layui-form-label">图片</label>
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn" id="upload_btn">上传图片</button>
+                        <div class="layui-upload-list" style="margin-left: 110px">
+                            <img class="upload-img" id="upload_img" src="../static/img/user_profile.png"/>
+                            <p id="upload_message"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="gname" lay-verify="required" autocomplete="off"
+                               class="layui-input input_box"/>
+                    </div>
+                    <div class="layui-input-inline">
+                        <input id="hidden_goods_id" type="hidden" name="goodsId"/>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单价</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="price" lay-verify="required" autocomplete="off"
+                               class="layui-input input_box" placeholder="¥"/>
+                    </div>
+                    <label class="layui-form-label" style="padding-left: 12px; text-align: left">元</label>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">成本价</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="cost" lay-verify="required" autocomplete="off"
+                               class="layui-input input_box" placeholder="¥"/>
+                    </div>
+                    <label class="layui-form-label" style="padding-left: 12px; text-align: left">元</label>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">规格</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="specification" lay-verify="required" autocomplete="off"
+                               class="layui-input input_box"/>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">库存</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="stock" lay-verify="required" autocomplete="off"
+                               class="layui-input input_box"/>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">销量</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="saleVolume" lay-verify="required" autocomplete="off"
+                               class="layui-input input_box"/>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">分类</label>
+                    <div class="layui-input-inline">
+                        <select id='sel_cats' name="categories" lay-filter="sel_cats" lay-verify="required">
+                            <option value="">请选择分类</option>
+                            <!--<option value="0" selected="" th:text="${goods.category.name}"></option>-->
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <input type="hidden" name="catId"/>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit="" lay-filter="confirm">确定</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        <div style="text-align: center">
+            <a href="https://isuperqiang.github.io" target="_blank">© 落英坠露</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    var name = $.cookie('store-name');
+    $('.nav_title').text(name);
+
+    // 动态创建下拉框
+    $.ajax({
+        type: 'post',
+        url: '/category/query',
+        data: '{\'page_index\':1, \'page_size\':99}',
+        dataType: 'json',
+        success: function (result) {
+            var count = parseInt(result.count, 10);
+            var cats = result.list;
+            console.log('count:' + count);
+
+            for (var i = 0; i < count; i++) {
+                var cat = cats[i];
+                if (i == 0) {
+                    $('#sel_cats').append('<option value="' + i + '" selected="">' + cat.name + '</option>');
+                } else {
+                    $('#sel_cats').append('<option value="' + i + '">' + cat.name + '</option>');
+                }
+            }
+        },
+        error: function () {
+            layer.msg('查询分类失败', {icon: 5});
+        }
+    });
+
+    layui.use('form', function () {
+        var form = layui.form;
+        //监听提交
+        form.on('submit(confirm)', function (data) {
+            var cat = $('#sel_cats option:selected').text();
+            data.field['category'] = {'name': cat};
+            var message = JSON.stringify(data.field);
+            console.log(message);
+
+            $.ajax({
+                type: "post",
+                url: "/goods/create",
+                async: true, // 异步处理
+                dataType: "json", // 预期的服务器响应的数据类型。
+                data: message, // 	规定要发送到服务器的数据
+                contentType: 'application/json',
+                success: function (result) {
+                    console.log('update succeed: ' + result);
+                    if (result.status == 1) {
+                        layer.msg('创建成功', {icon: 6}, function () {
+                            // 跳转
+                            location.href = '/goods_main.html';
+                        })
+                    } else {
+                        layer.msg(result.errorCode.message, {icon: 5})
+                    }
+                },
+                error: function () {
+                    layer.msg('请求失败', {icon: 5})
+                }
+            });
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        //日期
+        laydate.render({
+            elem: '#sale_from'
+            , type: 'time'
+            , btns: ['now', 'confirm']
+        });
+        laydate.render({
+            elem: '#sale_to'
+            , type: 'time'
+            , btns: ['now', 'confirm']
+        });
+    });
+
+    layui.use('layer');
+
+    layui.use('upload', function () {
+        var $ = layui.jquery
+            , upload = layui.upload;
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#upload_btn'
+            , url: '/upload/image_goods'
+            , method: 'post'
+            , accept: 'images'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#upload_img').attr('src', result); //图片链接（base64）
+                })
+            }
+            , auto: false
+            , bindAction: '#confirm'
+            , data: {
+                'goods_id': $('#hidden_goods_id').val()
+            }
+            , done: function (res) {
+                if (res.status == 0) {
+                    layer.msg('上传失败', {icon: 5});
+                } else {
+                    layer.msg('上传成功', {icon: 6});
+                }
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#upload_message');
+                demoText.html(
+                    '<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+    });
+
+    function logout() {
+        layer.confirm('确定退出登录？', function (index) {
+            $.ajax({
+                type: "post",
+                url: "/user/logout",
+                async: true, // 异步处理
+                dataType: "json", // 预期的服务器响应的数据类型。
+                data: JSON.stringify('{}'), // 	规定要发送到服务器的数据
+                contentType: 'application/json',
+                success: function (result) {
+                    console.log('logout succeed: ' + result);
+                    if (result.status == 1) {
+                        location.href = '/login.html';
+                    } else {
+                        layer.msg(result.errorCode.message, {icon: 5})
+                    }
+                },
+                error: function () {
+                    layer.msg('请求失败', {icon: 5})
+                }
+            });
+        });
+    }
+</script>
+
+</body>
+</html>
+
