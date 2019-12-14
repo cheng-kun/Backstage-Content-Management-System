@@ -1,11 +1,12 @@
 package com.company.backstagecontentmanagementsystem.controller;
 
-
 import com.company.backstagecontentmanagementsystem.config.Constant;
 import com.company.backstagecontentmanagementsystem.domain.Category;
 import com.company.backstagecontentmanagementsystem.domain.User;
+import com.company.backstagecontentmanagementsystem.response.ListResult;
 import com.company.backstagecontentmanagementsystem.response.Result;
 import com.company.backstagecontentmanagementsystem.service.CategoryService;
+import com.company.backstagecontentmanagementsystem.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,6 @@ public class CategoryController {
             return Result.createNoResult(Result.ErrorCode.CREATE_CATEGORY_FAILED);
         }
     }
-
 
     @PostMapping("/update")
     public Result updateCategory(@RequestBody Category category) {
