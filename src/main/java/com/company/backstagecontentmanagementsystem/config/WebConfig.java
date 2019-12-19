@@ -1,13 +1,14 @@
 package com.company.backstagecontentmanagementsystem.config;
 
-import com.company.backstagecontentmanagementsystem.response.CustomInterceptor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-@Configurationpublic class WebConfig extends WebMvcConfigurerAdapter {
+@Configuration
+public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Value("${upload.dir}")
     private String uploadDir;

@@ -3,8 +3,10 @@ package com.company.backstagecontentmanagementsystem.controller;
 import com.company.backstagecontentmanagementsystem.config.Constant;
 import com.company.backstagecontentmanagementsystem.domain.Goods;
 import com.company.backstagecontentmanagementsystem.domain.User;
+import com.company.backstagecontentmanagementsystem.response.ListResult;
 import com.company.backstagecontentmanagementsystem.response.Result;
 import com.company.backstagecontentmanagementsystem.service.GoodsService;
+import com.company.backstagecontentmanagementsystem.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -145,5 +147,4 @@ public class GoodsController {
             return Result.createNoResult(Result.ErrorCode.CHANGE_SALE_GOODS_FAILED);
         }
     }
-
 }

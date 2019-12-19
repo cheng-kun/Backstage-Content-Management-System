@@ -17,6 +17,7 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.lang.reflect.Method;
+
 @Configuration
 @EnableCaching
 public class RedisCacheConfig extends CachingConfigurerSupport {
