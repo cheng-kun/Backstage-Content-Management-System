@@ -8,7 +8,7 @@ Dependency Management: Maven
 Version Management: Git
 
 Technology Selection
-Back-End
+Back-End:
 Basic framework: Spring Boot
 Persistence layer framework: Mybatis
 Template engine: Thymeleaf
@@ -16,3 +16,6 @@ Database: MySQL
 Database connection pool: Druid
 Caching Framework: Redis
 Reverse proxy: nginx
+Front-End:
+Basic framework: layui
+JavaScript framework: jQuery
