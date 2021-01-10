@@ -24,7 +24,7 @@
                     <dd><a href="">Security Configuration</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">exit</a></li>
         </ul>
     </div>
 
@@ -111,7 +111,7 @@
                             data: da,
                             contentType: 'application/json',
                             success: function () {
-                                layer.msg('删除成功', {icon: 6});
+                                layer.msg('deleted', {icon: 6});
                                 table.reload('render_cats', {
                                     page: {
                                         curr: 1
@@ -132,7 +132,6 @@
             active[type] ? active[type].call(this) : '';
         });
 
-        //监听工具条
         table.on('tool(category_list)', function (obj) {
             var data = obj.data;
             console.log('click:' + data.username + data.city);
@@ -149,7 +148,7 @@
                         success: function (result) {
                             console.log('delete succeed: ' + result);
                             if (result.status == 1) {
-                                layer.msg('删除成功', {icon: 6});
+                                layer.msg('deleted', {icon: 6});
                                 obj.del();
                                 layer.close(index);
                             } else {
@@ -163,7 +162,7 @@
                 });
             } else if (obj.event === 'edit') {
                 // prompt层
-                layer.prompt({title: '输入分类名称，并确认', formType: 2}, function (text, index) {
+                layer.prompt({title: 'enter category name，and confirm', formType: 2}, function (text, index) {
                     layer.close(index);
                     layer.msg('您最后写下了：' + text);
                     // refresh
@@ -203,10 +202,10 @@
                 [
                     {type: 'checkbox'}
                     , {field: 'catId', title: 'ID', width: 100, unresize: true, sort: true}
-                    , {field: 'name', title: '名称'}
-                    , {field: 'createdAt', title: '创建时间', width: 200}
-                    , {field: 'sequence', title: '序号', width: 200}
-                    , {fixed: 'right', title: '操作', width: 200, align: 'center', toolbar: '#category_operation'},
+                    , {field: 'name', title: 'name'}
+                    , {field: 'createdAt', title: 'create date', width: 200}
+                    , {field: 'sequence', title: 'sequence', width: 200}
+                    , {fixed: 'right', title: 'operation', width: 200, align: 'center', toolbar: '#category_operation'},
                 ]]
             , response: {
                 dataName: 'list',
@@ -222,7 +221,7 @@
             , id: 'render_cats'
         });
 
-        // 查询按钮
+
         $('#btn_query').on('click', function () {
             console.log('click query button');
             var text = $('#text_input_name').val();
@@ -236,11 +235,10 @@
             });
         });
 
-        // 添加按钮
         $('#btn_add').on('click', function () {
             console.log('click add button');
-            //prompt层
-            layer.prompt({title: '输入分类名称，并确认', formType: 2}, function (text, index) {
+
+            layer.prompt({title: 'enter category name and confirm', formType: 2}, function (text, index) {
                 layer.close(index);
                 var cat = {'name': text};
                 $.ajax({
@@ -253,7 +251,7 @@
                     success: function (result) {
                         console.log('query succeed: ' + result);
                         if (result.status == 1) {
-                            layer.msg('添加成功', {icon: 6});
+                            layer.msg('added successfully', {icon: 6});
                             table.reload('render_cats', {
                                 page: {
                                     curr: 1

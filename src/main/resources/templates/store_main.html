@@ -14,7 +14,7 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">Goods Management Backstage System</div>
-        <div class="div_center"><h2 class="nav_title" th:text="${store.name}">世纪华联</h2></div>
+        <div class="div_center"><h2 class="nav_title" th:text="${store.name}">supermarket</h2></div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <dl class="layui-nav-child">
@@ -22,7 +22,7 @@
                     <dd><a href="">Security Configuration</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">exit</a></li>
         </ul>
     </div>
 
@@ -46,61 +46,61 @@
     </div>
 
     <div class="layui-body main_body">
-        <h1>店铺信息</h1>
+        <h1>store information</h1>
         <hr/>
         <div>
             <div class="layui-form-item" style="margin-top: 20px">
-                <label class="layui-form-label">店铺 Logo</label>
+                <label class="layui-form-label">store Logo</label>
                 <img class="upload-img" id="store_img" src="../static/img/user_profile.png" th:src="${store.logo}"/>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">店铺名称</label>
-                <label class="layui-form-label show-info" th:text="${store.name}">世纪华联超市</label>
+                <label class="layui-form-label">store name</label>
+                <label class="layui-form-label show-info" th:text="${store.name}">supermarket</label>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">联系电话</label>
+                <label class="layui-form-label">phone number</label>
                 <label class="layui-form-label show-info" th:text="${store.phone}">15868825645</label>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">创建时间</label>
+                <label class="layui-form-label">create date</label>
                 <label class="layui-form-label show-info"
                        th:text="${store.createdAt}">2018-06-27</label>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">人均价格</label>
-                <label class="layui-form-label show-info" th:text="${store.avgPrice + '&nbsp;元'}">100&nbsp;元</label>
+                <label class="layui-form-label">Per capita price</label>
+                <label class="layui-form-label show-info" th:text="${store.avgPrice + '&nbsp;dollar'}">100&nbsp;dollar</label>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">类目</label>
-                <label class="layui-form-label show-info" th:text="${store.category}">大型超市</label>
+                <label class="layui-form-label">category</label>
+                <label class="layui-form-label show-info" th:text="${store.category}">supermarket</label>
             </div>
 
             <div class="layui-form-item">
                 <div class="layui-inline">
-                    <label class="layui-form-label">营业时间</label>
+                    <label class="layui-form-label">Business hours</label>
                     <label class="layui-form-label show-info"
                            th:text="${store.saleFrom + '&nbsp;-&nbsp;' + store.saleTo}">8:00-20:00</label>
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">地址</label>
-                <label class="layui-form-label show-info" th:text="${store.address}">杭州市西湖区紫金花路 30 号</label>
+                <label class="layui-form-label">address</label>
+                <label class="layui-form-label show-info" th:text="${store.address}">address 123</label>
             </div>
 
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">简介</label>
-                <label class="layui-form-label show-info" th:text="${store.description}">欢迎来到世纪联华，祝您购物愉快，么么哒～</label>
+                <label class="layui-form-label">Profile</label>
+                <label class="layui-form-label show-info" th:text="${store.description}">welcome</label>
             </div>
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <a class="layui-btn" href="store_edit.html" style="color: #fff;">编辑</a>
+                    <a class="layui-btn" href="store_edit.html" style="color: #fff;">edit</a>
                 </div>
             </div>
         </div>

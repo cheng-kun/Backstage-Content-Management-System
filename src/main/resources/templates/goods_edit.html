@@ -15,7 +15,7 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">Goods Management Backstage System</div>
-        <div class="div_center"><h2 class="nav_title">世纪华联</h2></div>
+        <div class="div_center"><h2 class="nav_title">supermarket</h2></div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <dl class="layui-nav-child">
@@ -23,7 +23,7 @@
                     <dd><a href="">Security Configuration</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">exit</a></li>
         </ul>
     </div>
 
@@ -57,9 +57,9 @@
         <div>
             <form class="layui-form" action="">
                 <div class="layui-form-item" style="margin-top: 20px">
-                    <label class="layui-form-label">图片</label>
+                    <label class="layui-form-label">Picture</label>
                     <div class="layui-upload">
-                        <button type="button" class="layui-btn" id="upload_btn">上传图片</button>
+                        <button type="button" class="layui-btn" id="upload_btn">upload Picture</button>
                         <div class="layui-upload-list" style="margin-left: 110px">
                             <img class="upload-img" id="upload_img" src="../static/img/user_profile.png"
                                  th:src="${goods.picture}"/>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">名称</label>
+                    <label class="layui-form-label">name</label>
                     <div class="layui-input-inline">
                         <input type="text" name="gname" lay-verify="required" autocomplete="off"
                                class="layui-input input_box" th:value="${goods.gname}"/>
@@ -79,25 +79,25 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">单价</label>
+                    <label class="layui-form-label">unit price</label>
                     <div class="layui-input-inline">
                         <input type="number" name="price" lay-verify="required" autocomplete="off"
                                class="layui-input input_box" placeholder="¥" th:value="${goods.price}"/>
                     </div>
-                    <label class="layui-form-label" style="padding-left: 12px; text-align: left">元</label>
+                    <label class="layui-form-label" style="padding-left: 12px; text-align: left">dollar</label>
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">成本价</label>
+                    <label class="layui-form-label">Cost price</label>
                     <div class="layui-input-inline">
                         <input type="number" name="cost" lay-verify="required" autocomplete="off"
                                class="layui-input input_box" placeholder="¥" th:value="${goods.cost}"/>
                     </div>
-                    <label class="layui-form-label" style="padding-left: 12px; text-align: left">元</label>
+                    <label class="layui-form-label" style="padding-left: 12px; text-align: left">dollar</label>
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">规格</label>
+                    <label class="layui-form-label">specification</label>
                     <div class="layui-input-inline">
                         <input type="text" name="specification" lay-verify="required" autocomplete="off"
                                class="layui-input input_box" th:value="${goods.specification}"/>
@@ -105,7 +105,7 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">库存</label>
+                    <label class="layui-form-label">stock</label>
                     <div class="layui-input-inline">
                         <input type="number" name="stock" lay-verify="required" autocomplete="off"
                                class="layui-input input_box" th:value="${goods.stock}"/>
@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">销量</label>
+                    <label class="layui-form-label">sale amount</label>
                     <div class="layui-input-inline">
                         <input type="number" name="saleVolume" lay-verify="required" autocomplete="off"
                                class="layui-input input_box" th:value="${goods.saleVolume}"/>
@@ -124,7 +124,7 @@
                     <label class="layui-form-label">分类</label>
                     <div class="layui-input-inline">
                         <select id='sel_cats' name="categories" lay-filter="sel_cats" lay-verify="required">
-                            <option value="">请选择分类</option>
+                            <option value="">please select category</option>
                             <!--<option value="0" selected="" th:text="${goods.category.name}"></option>-->
                         </select>
                     </div>
@@ -255,7 +255,7 @@
             , error: function () {
                 var demoText = $('#upload_message');
                 demoText.html(
-                    '<span style="color: #FF5722;">upload failed</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                    '<span style="color: #FF5722;">upload failed</span> <a class="layui-btn layui-btn-mini demo-reload">retry</a>');
                 demoText.find('.demo-reload').on('click', function () {
                     uploadInst.upload();
                 });

@@ -14,7 +14,7 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">Goods Management Backstage System</div>
-        <div class="div_center"><h2 class="nav_title">世纪华联</h2></div>
+        <div class="div_center"><h2 class="nav_title">supermarket</h2></div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <dl class="layui-nav-child">
@@ -22,7 +22,7 @@
                     <dd><a href="">Security Configuration</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">exit</a></li>
         </ul>
     </div>
 
@@ -57,38 +57,38 @@
 
         <div>
             <div class="layui-form-item" style="margin-top: 20px">
-                <label class="layui-form-label">图片</label>
+                <label class="layui-form-label">Picture</label>
                 <img class="upload-img" id="store_img" src="../static/img/user_profile.png" th:src="${goods.picture}"/>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">名称</label>
-                <label class="layui-form-label show-info" th:text="${goods.gname}">好利来蛋糕</label>
+                <label class="layui-form-label">name</label>
+                <label class="layui-form-label show-info" th:text="${goods.gname}">cakes</label>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">单价</label>
+                <label class="layui-form-label">unit price</label>
                 <label class="layui-form-label show-info" th:text="${goods.price}">10.00</label>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">成本价</label>
+                <label class="layui-form-label">Cost price</label>
                 <label class="layui-form-label show-info" th:text="${goods.cost}">8.00</label>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">规格</label>
+                <label class="layui-form-label">specification</label>
                 <label class="layui-form-label show-info" th:text="${goods.specification}">个</label>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">库存</label>
+                <label class="layui-form-label">stock</label>
                 <label class="layui-form-label show-info" th:text="${goods.stock}">2000</label>
             </div>
 
             <div class="layui-form-item">
                 <div class="layui-inline">
-                    <label class="layui-form-label">销量</label>
+                    <label class="layui-form-label">sale amount</label>
                     <label class="layui-form-label show-info" th:text="${goods.saleVolume}">100</label>
                 </div>
             </div>

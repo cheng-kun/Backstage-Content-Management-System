@@ -15,7 +15,7 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">Goods Management Backstage System</div>
-        <div class="div_center"><h2 class="nav_title">世纪华联</h2></div>
+        <div class="div_center"><h2 class="nav_title">supermarket</h2></div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <dl class="layui-nav-child">
@@ -23,7 +23,7 @@
                     <dd><a href="">Security Configuration</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">exit</a></li>
         </ul>
     </div>
 
@@ -52,12 +52,12 @@
         </a>
 
         <hr/>
-        <h1>编辑会员</h1>
+        <h1>edit member</h1>
         <hr/>
         <div>
             <form class="layui-form" action="">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">名称</label>
+                    <label class="layui-form-label">name</label>
                     <div class="layui-input-inline">
                         <input type="text" name="nickname" lay-verify="required" autocomplete="off"
                                class="layui-input input_box" th:value="${member.nickname}"/>
@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">性别</label>
+                    <label class="layui-form-label">sex</label>
                     <div class="layui-input-block">
                         <input type="radio" name="gender" value="男" title="男" th:checked="${member.gender} == '男'">
                         <input type="radio" name="gender" value="女" title="女" th:checked="${member.gender} == '女'">
@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">手机号</label>
+                    <label class="layui-form-label">phone number</label>
                     <div class="layui-input-inline">
                         <input type="number" name="phone" lay-verify="required" autocomplete="off"
                                class="layui-input input_box" th:value="${member.phone}"/>
@@ -84,7 +84,7 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">卡号</label>
+                    <label class="layui-form-label">card number</label>
                     <div class="layui-input-inline">
                         <input type="text" name="cardNo" autocomplete="off" class="layui-input input_box"
                                placeholder="选填"

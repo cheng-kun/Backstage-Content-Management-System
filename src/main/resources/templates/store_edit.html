@@ -15,7 +15,7 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">Goods Management Backstage System</div>
-        <div class="div_center"><h2 class="nav_title" th:text="${store.name}">世纪华联</h2></div>
+        <div class="div_center"><h2 class="nav_title" th:text="${store.name}">supermarket</h2></div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <dl class="layui-nav-child">
@@ -23,7 +23,7 @@
                     <dd><a href="">Security Configuration</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">exit</a></li>
         </ul>
     </div>
 
@@ -57,9 +57,9 @@
         <div>
             <form class="layui-form" action="">
                 <div class="layui-form-item" style="margin-top: 20px">
-                    <label class="layui-form-label">店铺 Logo</label>
+                    <label class="layui-form-label">store Logo</label>
                     <div class="layui-upload">
-                        <button type="button" class="layui-btn" id="upload_btn">上传图片</button>
+                        <button type="button" class="layui-btn" id="upload_btn">upload picture</button>
                         <div class="layui-upload-list" style="margin-left: 110px">
                             <img class="upload-img" id="upload_img" src="../static/img/user_profile.png"
                                  th:src="${store.logo}"/>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">店铺名称</label>
+                    <label class="layui-form-label">store name</label>
                     <div class="layui-input-inline">
                         <input type="text" name="name" lay-verify="required" autocomplete="off"
                                class="layui-input input_box" th:value="${store.name}"/>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">联系电话</label>
+                    <label class="layui-form-label">contact number</label>
                     <div class="layui-input-inline">
                         <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off"
                                class="layui-input input_box" th:value="${store.phone}"/>
@@ -86,16 +86,16 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">人均价格</label>
+                    <label class="layui-form-label">per capita price</label>
                     <div class="layui-input-inline">
                         <input type="number" name="avgPrice" lay-verify="required" autocomplete="off"
                                class="layui-input input_box" placeholder="¥" th:value="${store.avgPrice}"/>
                     </div>
-                    <label class="layui-form-label" style="padding-left: 12px; text-align: left">元</label>
+                    <label class="layui-form-label" style="padding-left: 12px; text-align: left">dollar</label>
                 </div>
 
                 <div class="layui-form-item" style="margin-top: 20px">
-                    <label class="layui-form-label">类目</label>
+                    <label class="layui-form-label">category</label>
                     <div class="layui-input-inline">
                         <input type="value" name="category" lay-verify="required" autocomplete="off"
                                class="layui-input input_box" th:value="${store.category}"/>
@@ -104,7 +104,7 @@
 
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">营业时间</label>
+                        <label class="layui-form-label">business hours</label>
                         <div class="layui-input-inline" style="width: 100px;">
                             <input id="sale_from" type="text" name="saleFrom" placeholder="00:00" autocomplete="off"
                                    class="layui-input" th:value="${store.saleFrom}"/>
@@ -118,32 +118,7 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">地址</label>
-                    <!--<div class="layui-input-inline">-->
-                    <!--<select name="quiz1">-->
-                    <!--<option value="">请选择省</option>-->
-                    <!--<option value="浙江" selected="">浙江省</option>-->
-                    <!--<option value="你的工号">江西省</option>-->
-                    <!--<option value="你最喜欢的老师">福建省</option>-->
-                    <!--</select>-->
-                    <!--</div>-->
-                    <!--<div class="layui-input-inline">-->
-                    <!--<select name="quiz2">-->
-                    <!--<option value="">请选择市</option>-->
-                    <!--<option value="杭州" selected="">杭州市</option>-->
-                    <!--<option value="宁波">宁波市</option>-->
-                    <!--<option value="温州">温州市</option>-->
-                    <!--<option value="温州">绍兴市</option>-->
-                    <!--</select>-->
-                    <!--</div>-->
-                    <!--<div class="layui-input-inline">-->
-                    <!--<select name="quiz3">-->
-                    <!--<option value="">请选择县/区</option>-->
-                    <!--<option value="西湖区" selected="">西湖区</option>-->
-                    <!--<option value="余杭区">余杭区</option>-->
-                    <!--<option value="拱墅区">临安市</option>-->
-                    <!--</select>-->
-                    <!--</div>-->
+                    <label class="layui-form-label">Address</label>
 
                     <div class="layui-input-block">
                         <input type="text" name="address" lay-verify="required" autocomplete="off"
@@ -152,9 +127,9 @@
                 </div>
 
                 <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">简介</label>
+                    <label class="layui-form-label">profile</label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入店铺简介（选填）" name="description" class="layui-textarea"
+                        <textarea placeholder="please enter store profile (optional)" name="description" class="layui-textarea"
                                   th:text="${store.description}"></textarea>
                     </div>
                 </div>
@@ -255,7 +230,7 @@
             , error: function () {
                 var demoText = $('#upload_message');
                 demoText.html(
-                    '<span style="color: #FF5722;">upload failed</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                    '<span style="color: #FF5722;">upload failed</span> <a class="layui-btn layui-btn-mini demo-reload">retry</a>');
                 demoText.find('.demo-reload').on('click', function () {
                     uploadInst.upload();
                 });

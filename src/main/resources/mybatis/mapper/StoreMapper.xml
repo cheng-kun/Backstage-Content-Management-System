@@ -14,8 +14,7 @@
         <result property="avgPrice" column="avg_price"/>
         <result property="saleFrom" column="sale_from"/>
         <result property="saleTo" column="sale_to"/>
-        <!--嵌套结果查询-->
-        <!--一对一查询-->
+
         <association property="user" column="user_id" javaType="User">
             <id property="userId" column="user_id"/>
             <result property="username" column="username"/>
