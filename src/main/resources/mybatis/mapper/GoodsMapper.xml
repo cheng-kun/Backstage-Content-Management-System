@@ -13,8 +13,7 @@
         <result property="saleVolume" column="sale_volume"/>
         <result property="cost" column="cost"/>
         <result property="onSale" column="on_sale"/>
-        <!--嵌套结果查询-->
-        <!--一对一查询-->
+
         <association property="category" column="cat_id" javaType="Category">
             <id property="catId" column="cat_id"/>
             <result property="name" column="name"/>

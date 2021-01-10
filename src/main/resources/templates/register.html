@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>注册</title>
+    <title>register</title>
     <link rel="stylesheet" th:href="@{/static/res/layui/css/layui.css}" media="all"/>
     <link rel="stylesheet" th:href="@{/static/css/login.css}" media="all"/>
     <link rel="stylesheet" th:href="@{/static/css/admin.css}" media="all"/>
@@ -13,9 +13,9 @@
 
 <body>
 <div class="div_center" style="padding-top: 160px">
-    <h1 class="content_center">商家管理后台</h1>
+    <h1 class="content_center">Goods Management Backstage</h1>
 
-    <p class="content_center" style="margin-top: 18px; font-size: 14px">方便、可靠、高效的商家管理系统</p>
+    <p class="content_center" style="margin-top: 18px; font-size: 14px">Convenient, reliable and efficient merchant management system</p>
 </div>
 
 <div class="div_center" style="margin-top: 20px;width: 300px;">
@@ -46,26 +46,24 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <a href="login.html" class="layadmin-link action_sub_button">已有账号登录</a>
+            <a href="login.html" class="layadmin-link action_sub_button">already logged</a>
         </div>
 
     </form>
 </div>
 
 <script>
-    // 提交表单
     layui.use(['layer', 'form'], function () {
         const form = layui.form;
 
-        //监听提交
         form.on('submit(register_form_button)', function (data) {
-            console.log(JSON.stringify(data.field));//当前容器的全部表单字段，名值对形式：{name: value}
+            console.log(JSON.stringify(data.field));
             if (data.field.password != (data.field.re_password)) {
-                layer.msg('两次输入的密码不一致', {icon: 5});
+                layer.msg('The two passwords entered are inconsistent', {icon: 5});
                 return false;
             }
             if (true) {
-                layer.msg('暂时不允许注册');
+                layer.msg('not allowed to register');
                 return false;
             }
             var varReg = {
@@ -76,14 +74,14 @@
             $.ajax({
                 type: "post",
                 url: "/user/register",
-                async: true, // 异步处理
-                dataType: "json", // 预期的服务器响应的数据类型。
-                data: jsonReg, // 	规定要发送到服务器的数据
+                async: true,
+                dataType: "json",
+                data: jsonReg,
                 contentType: 'application/json',
                 success: function (result) {
                     console.log('register succeed: ' + result);
                     if (result.status == 1) {
-                        layer.msg('注册成功', {icon: 6}, function () {
+                        layer.msg('registration success', {icon: 6}, function () {
                             location.href = 'login.html';
                         });
                     } else {
@@ -92,11 +90,11 @@
                 },
                 error: function () {
                     console.log('request error');
-                    layer.msg('请求失败', {icon: 5});
+                    layer.msg('Request failed', {icon: 5});
                 }
             });
 
-            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            return false;
         });
     });
 </script>

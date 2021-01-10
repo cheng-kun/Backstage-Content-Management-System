@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <title>商家管理后台</title>
+    <title>Goods Management Backstage</title>
     <link rel="stylesheet" th:href="@{/static/res/layui/css/layui.css}" media="all"/>
     <link rel="stylesheet" th:href="@{/static/css/user.css}"/>
     <script type="text/javascript" th:src="@{/static/res/layui/layui.js}" charset="utf-8"></script>
@@ -13,96 +13,94 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">商家后台管理系统</div>
-        <div class="div_center"><h2 class="nav_title" th:text="${store.name}">世纪华联</h2></div>
+        <div class="layui-logo">Goods Management Backstage System</div>
+        <div class="div_center"><h2 class="nav_title" th:text="${store.name}">supermarket</h2></div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
+                    <dd><a href="">Basic Information</a></dd>
+                    <dd><a href="">Security Configuration</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
+            <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">exit</a></li>
         </ul>
     </div>
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item">
-                    <a href="goods_main.html">商品管理</a>
+                    <a href="goods_main.html">Goods Management</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="category_main.html">分类管理</a>
+                    <a href="category_main.html">Category Management</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="member_main.html">会员管理</a>
+                    <a href="member_main.html">Member Management</a>
                 </li>
                 <li class="layui-nav-item layui-this layui-nav-itemed">
-                    <a href="store_main.html">店铺设置</a>
+                    <a href="store_main.html">Store Edit</a>
                 </li>
             </ul>
         </div>
     </div>
 
     <div class="layui-body main_body">
-        <!-- 内容主体区域 -->
-        <h1>店铺信息</h1>
+        <h1>store information</h1>
         <hr/>
         <div>
             <div class="layui-form-item" style="margin-top: 20px">
-                <label class="layui-form-label">店铺 Logo</label>
+                <label class="layui-form-label">store Logo</label>
                 <img class="upload-img" id="store_img" src="../static/img/user_profile.png" th:src="${store.logo}"/>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">店铺名称</label>
-                <label class="layui-form-label show-info" th:text="${store.name}">世纪华联超市</label>
+                <label class="layui-form-label">store name</label>
+                <label class="layui-form-label show-info" th:text="${store.name}">supermarket</label>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">联系电话</label>
+                <label class="layui-form-label">phone number</label>
                 <label class="layui-form-label show-info" th:text="${store.phone}">15868825645</label>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">创建时间</label>
+                <label class="layui-form-label">create date</label>
                 <label class="layui-form-label show-info"
                        th:text="${store.createdAt}">2018-06-27</label>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">人均价格</label>
-                <label class="layui-form-label show-info" th:text="${store.avgPrice + '&nbsp;元'}">100&nbsp;元</label>
+                <label class="layui-form-label">Per capita price</label>
+                <label class="layui-form-label show-info" th:text="${store.avgPrice + '&nbsp;dollar'}">100&nbsp;dollar</label>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">类目</label>
-                <label class="layui-form-label show-info" th:text="${store.category}">大型超市</label>
+                <label class="layui-form-label">category</label>
+                <label class="layui-form-label show-info" th:text="${store.category}">supermarket</label>
             </div>
 
             <div class="layui-form-item">
                 <div class="layui-inline">
-                    <label class="layui-form-label">营业时间</label>
+                    <label class="layui-form-label">Business hours</label>
                     <label class="layui-form-label show-info"
                            th:text="${store.saleFrom + '&nbsp;-&nbsp;' + store.saleTo}">8:00-20:00</label>
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">地址</label>
-                <label class="layui-form-label show-info" th:text="${store.address}">杭州市西湖区紫金花路 30 号</label>
+                <label class="layui-form-label">address</label>
+                <label class="layui-form-label show-info" th:text="${store.address}">address 123</label>
             </div>
 
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">简介</label>
-                <label class="layui-form-label show-info" th:text="${store.description}">欢迎来到世纪联华，祝您购物愉快，么么哒～</label>
+                <label class="layui-form-label">Profile</label>
+                <label class="layui-form-label show-info" th:text="${store.description}">welcome</label>
             </div>
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <a class="layui-btn" href="store_edit.html" style="color: #fff;">编辑</a>
+                    <a class="layui-btn" href="store_edit.html" style="color: #fff;">edit</a>
                 </div>
             </div>
         </div>
@@ -110,9 +108,8 @@
     </div>
 
     <div class="layui-footer">
-        <!-- 底部固定区域 -->
         <div style="text-align: center">
-            <a href="https://isuperqiang.github.io" target="_blank">© 落英坠露</a>
+            <a href="https://github.com/cheng-kun" target="_blank">© kun</a>
         </div>
     </div>
 </div>
@@ -122,13 +119,13 @@
     layui.use('layer');
 
     function logout() {
-        layer.confirm('确定退出登录？', function () {
+        layer.confirm('log out？', function () {
             $.ajax({
                 type: "post",
                 url: "/user/logout",
-                async: true, // 异步处理
-                dataType: "json", // 预期的服务器响应的数据类型。
-                data: JSON.stringify('{}'), // 	规定要发送到服务器的数据
+                async: true,
+                dataType: "json",
+                data: JSON.stringify('{}'),
                 contentType: 'application/json',
                 success: function (result) {
                     console.log('logout succeed: ' + result);
@@ -139,7 +136,7 @@
                     }
                 },
                 error: function () {
-                    layer.msg('请求失败', {icon: 5})
+                    layer.msg('Request failed', {icon: 5})
                 }
             });
         });
