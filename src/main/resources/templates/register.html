@@ -13,7 +13,7 @@
 
 <body>
 <div class="div_center" style="padding-top: 160px">
-    <h1 class="content_center">商家管理后台</h1>
+    <h1 class="content_center">Goods Management Backstage</h1>
 
     <p class="content_center" style="margin-top: 18px; font-size: 14px">方便、可靠、高效的商家管理系统</p>
 </div>
@@ -53,11 +53,9 @@
 </div>
 
 <script>
-    // 提交表单
     layui.use(['layer', 'form'], function () {
         const form = layui.form;
 
-        //监听提交
         form.on('submit(register_form_button)', function (data) {
             console.log(JSON.stringify(data.field));//当前容器的全部表单字段，名值对形式：{name: value}
             if (data.field.password != (data.field.re_password)) {
@@ -76,9 +74,9 @@
             $.ajax({
                 type: "post",
                 url: "/user/register",
-                async: true, // 异步处理
-                dataType: "json", // 预期的服务器响应的数据类型。
-                data: jsonReg, // 	规定要发送到服务器的数据
+                async: true,
+                dataType: "json",
+                data: jsonReg,
                 contentType: 'application/json',
                 success: function (result) {
                     console.log('register succeed: ' + result);
@@ -92,11 +90,11 @@
                 },
                 error: function () {
                     console.log('request error');
-                    layer.msg('请求失败', {icon: 5});
+                    layer.msg('Request failed', {icon: 5});
                 }
             });
 
-            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            return false;
         });
     });
 </script>

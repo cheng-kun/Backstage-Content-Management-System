@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <title>商家管理后台</title>
+    <title>Goods Management Backstage</title>
 
     <link rel="stylesheet" th:href="@{/static/res/layui/css/layui.css}" media="all"/>
     <link rel="stylesheet" th:href="@{/static/css/user.css}"/>
@@ -15,13 +15,13 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">商家后台管理系统</div>
+        <div class="layui-logo">Goods Management Backstage System</div>
         <div class="div_center"><h2 class="nav_title">世纪华联</h2></div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
+                    <dd><a href="">Basic Information</a></dd>
+                    <dd><a href="">Security Configuration</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
@@ -30,37 +30,35 @@
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item layui-this layui-nav-itemed">
-                    <a href="goods_main.html">商品管理</a>
+                    <a href="goods_main.html">Goods Management</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="category_main.html">分类管理</a>
+                    <a href="category_main.html">Category Management</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="member_main.html">会员管理</a>
+                    <a href="member_main.html">Member Management</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="store_main.html">店铺设置</a>
+                    <a href="store_main.html">Store Edit</a>
                 </li>
             </ul>
         </div>
     </div>
 
     <div class="layui-body main_body">
-        <!-- 内容主体区域 -->
-        <h1>商品管理</h1>
+        <h1>Goods Management</h1>
         <hr/>
         <div>
             <div class="layui-form-item" style="margin-top: 20px">
-                <label class="layui-form-label">商品名称</label>
+                <label class="layui-form-label">Goods Name</label>
                 <div class="layui-input-inline">
                     <input id="text_input_name" type="text" name="gname" lay-verify="required" autocomplete="off"
-                           class="layui-input input_box" placeholder="请输入商品名称"/>
+                           class="layui-input input_box" placeholder="please enter goods name"/>
                 </div>
                 <div class="layui-input-inline" style="margin-left: 40px">
-                    <button id="btn_query" class="layui-btn">查询</button>
+                    <button id="btn_query" class="layui-btn">inquiry</button>
                 </div>
 
                 <div class="layui-input-inline" style="margin-left: 20px">
@@ -68,17 +66,17 @@
             </div>
 
             <div id="ope_button">
-                <button id="btn_delete" data-type="deleteGoods" class="layui-btn">删除</button>
-                <button id="btn_add_stock" data-type="addStock" class="layui-btn">加库存</button>
-                <button id="btn_sale" data-type="changeSale" class="layui-btn" style="display: none;">下架</button>
-                <a href="goods_new.html" class="layui-btn" style="color:#fff;margin-left: 80px">添加</a>
+                <button id="btn_delete" data-type="deleteGoods" class="layui-btn">delete</button>
+                <button id="btn_add_stock" data-type="addStock" class="layui-btn">change stock</button>
+                <button id="btn_sale" data-type="changeSale" class="layui-btn" style="display: none;">remove</button>
+                <a href="goods_new.html" class="layui-btn" style="color:#fff;margin-left: 80px">add</a>
             </div>
 
             <div class="layui-tab layui-tab-brief" lay-filter="goods_status">
                 <ul class="layui-tab-title">
                     <li class="layui-this">全部</li>
-                    <li>在售中</li>
-                    <li>已下架</li>
+                    <li>on sale</li>
+                    <li>removed</li>
                 </ul>
                 <div class="layui-tab-content"></div>
             </div>
@@ -96,9 +94,8 @@
     </div>
 
     <div class="layui-footer">
-        <!-- 底部固定区域 -->
         <div style="text-align: center">
-            <a href="https://isuperqiang.github.io" target="_blank">© 落英坠露</a>
+            <a href="https://github.com/cheng-kun" target="_blank">© kun</a>
         </div>
     </div>
 </div>
@@ -129,7 +126,7 @@
             } else if (data.index == 1) {
                 // 在售
                 $('#btn_sale').show();
-                $('#btn_sale').text('下架');
+                $('#btn_sale').text('remove');
                 table.reload('render_goods', {
                     where: {
                         'sale': 1
@@ -139,7 +136,6 @@
                     }
                 });
             } else if (data.index == 2) {
-                // 下架
                 $('#btn_sale').show();
                 $('#btn_sale').text('上架');
                 table.reload('render_goods', {
@@ -154,21 +150,21 @@
         });
         var $ = layui.$, active = {
             // 删除
-            deleteGoods: function () { //获取选中数据
+            deleteGoods: function () {
                 var checkStatus = table.checkStatus('render_goods')
                     , data = checkStatus.data;
                 if (data.length == 0) {
-                    layer.msg('请选择商品');
+                    layer.msg('please select goods name');
                 } else {
-                    layer.confirm('确定删除这些商品？', function () {
+                    layer.confirm('Deleted？', function () {
                         var da = JSON.stringify(data);
                         console.log('da' + da);
                         $.ajax({
                             type: "post",
                             url: "/goods/delete_bundle",
-                            async: true, // 异步处理
-                            dataType: "json", // 预期的服务器响应的数据类型。
-                            data: da, // 	规定要发送到服务器的数据
+                            async: true,
+                            dataType: "json",
+                            data: da,
                             contentType: 'application/json',
                             success: function () {
                                 layer.msg('删除成功', {icon: 6});
@@ -179,21 +175,20 @@
                                 });
                             },
                             error: function () {
-                                layer.msg('请求失败', {icon: 5})
+                                layer.msg('Request failed', {icon: 5})
                             }
                         });
                     });
                 }
             },
 
-            // 加库存
             addStock: function () {
                 var checkStatus = table.checkStatus('render_goods')
                     , data = checkStatus.data;
                 if (data.length == 0) {
-                    layer.msg('请选择商品');
+                    layer.msg('plese select goods');
                 } else {
-                    layer.prompt({title: '输入要加的库存，并确认', formType: 2}, function (text, index) {
+                    layer.prompt({title: 'please enter stock', formType: 2}, function (text, index) {
                         layer.close(index);
                         data.map(function (item, index, input) {
                             return item['stock'] = parseInt(text, 10);
@@ -203,12 +198,12 @@
                         $.ajax({
                             type: "post",
                             url: "/goods/increase_stock",
-                            async: true, // 异步处理
-                            dataType: "json", // 预期的服务器响应的数据类型。
-                            data: da, // 	规定要发送到服务器的数据
+                            async: true,
+                            dataType: "json",
+                            data: da,
                             contentType: 'application/json',
                             success: function () {
-                                layer.msg('操作成功', {icon: 6});
+                                layer.msg('operation successfully', {icon: 6});
                                 table.reload('render_goods', {
                                     page: {
                                         curr: 1
@@ -216,18 +211,17 @@
                                 });
                             },
                             error: function () {
-                                layer.msg('请求失败', {icon: 5})
+                                layer.msg('Request failed', {icon: 5})
                             }
                         });
                     });
                 }
             },
-            // 上架 下架
             changeSale: function () {
                 var checkStatus = table.checkStatus('render_goods')
                     , data = checkStatus.data;
                 if (data.length == 0) {
-                    layer.msg('请选择商品');
+                    layer.msg('please select goods');
                 } else {
                     data.map(function (item, index, input) {
                         return item['onSale'] = !item['onSale'];
@@ -237,12 +231,12 @@
                     $.ajax({
                         type: "post",
                         url: "/goods/on_sale",
-                        async: true, // 异步处理
-                        dataType: "json", // 预期的服务器响应的数据类型。
-                        data: da, // 	规定要发送到服务器的数据
+                        async: true,
+                        dataType: "json",
+                        data: da,
                         contentType: 'application/json',
                         success: function () {
-                            layer.msg('操作成功', {icon: 6});
+                            layer.msg('operation successfully', {icon: 6});
                             table.reload('render_goods', {
                                 page: {
                                     curr: 1
@@ -250,7 +244,7 @@
                             });
                         },
                         error: function () {
-                            layer.msg('请求失败', {icon: 5})
+                            layer.msg('Request failed', {icon: 5})
                         }
                     });
                 }
@@ -269,13 +263,13 @@
                 location.href = '/goods_show?goods_id=' + data.goodsId;
             } else if (obj.event === 'del') {
                 var d = {'goodsId': data.goodsId};
-                layer.confirm('确定删除该商品？', function (index) {
+                layer.confirm('Deleted？', function (index) {
                     $.ajax({
                         type: "post",
                         url: "/goods/delete",
-                        async: true, // 异步处理
-                        dataType: "json", // 预期的服务器响应的数据类型。
-                        data: JSON.stringify(d), // 	规定要发送到服务器的数据
+                        async: true,
+                        dataType: "json",
+                        data: JSON.stringify(d),
                         contentType: 'application/json',
                         success: function (result) {
                             console.log('delete succeed: ' + result);
@@ -288,7 +282,7 @@
                             }
                         },
                         error: function () {
-                            layer.msg('请求失败', {icon: 5})
+                            layer.msg('Request failed', {icon: 5})
                         }
                     });
                 });
@@ -346,13 +340,13 @@
     });
 
     function logout() {
-        layer.confirm('确定退出登录？', function (index) {
+        layer.confirm('log out？', function (index) {
             $.ajax({
                 type: "post",
                 url: "/user/logout",
-                async: true, // 异步处理
-                dataType: "json", // 预期的服务器响应的数据类型。
-                data: JSON.stringify('{}'), // 	规定要发送到服务器的数据
+                async: true,
+                dataType: "json",
+                data: JSON.stringify('{}'),
                 contentType: 'application/json',
                 success: function (result) {
                     console.log('logout succeed: ' + result);
@@ -363,7 +357,7 @@
                     }
                 },
                 error: function () {
-                    layer.msg('请求失败', {icon: 5})
+                    layer.msg('Request failed', {icon: 5})
                 }
             });
         });

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <title>商家管理后台</title>
+    <title>Goods Management Backstage</title>
 
     <link rel="stylesheet" th:href="@{/static/res/layui/css/layui.css}" media="all"/>
     <link rel="stylesheet" th:href="@{/static/css/user.css}"/>
@@ -15,13 +15,13 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">商家后台管理系统</div>
+        <div class="layui-logo">Goods Management Backstage System</div>
         <div class="div_center"><h2 class="nav_title">世纪华联</h2></div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
+                    <dd><a href="">Basic Information</a></dd>
+                    <dd><a href="">Security Configuration</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
@@ -30,27 +30,25 @@
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item">
-                    <a href="goods_main.html">商品管理</a>
+                    <a href="goods_main.html">Goods Management</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="category_main.html">分类管理</a>
+                    <a href="category_main.html">Category Management</a>
                 </li>
                 <li class="layui-nav-item layui-this layui-nav-itemed">
-                    <a href="member_main.html">会员管理</a>
+                    <a href="member_main.html">Member Management</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="store_main.html">店铺设置</a>
+                    <a href="store_main.html">Store Edit</a>
                 </li>
             </ul>
         </div>
     </div>
 
     <div class="layui-body main_body">
-        <!-- 内容主体区域 -->
-        <h1>会员管理</h1>
+        <h1>Member Management</h1>
         <hr/>
         <div>
             <div class="layui-form-item" style="margin-top: 20px">
@@ -79,9 +77,8 @@
     </div>
 
     <div class="layui-footer">
-        <!-- 底部固定区域 -->
         <div style="text-align: center">
-            <a href="https://isuperqiang.github.io" target="_blank">© 落英坠露</a>
+            <a href="https://github.com/cheng-kun" target="_blank">© kun</a>
         </div>
     </div>
 </div>
@@ -102,15 +99,15 @@
                 if (data.length == 0) {
                     layer.msg('请选择会员');
                 } else {
-                    layer.confirm('确定删除这些会员？', function () {
+                    layer.confirm('Deleted？', function () {
                         var da = JSON.stringify(data);
                         console.log('da' + da);
                         $.ajax({
                             type: "post",
                             url: "/member/delete_bundle",
-                            async: true, // 异步处理
-                            dataType: "json", // 预期的服务器响应的数据类型。
-                            data: da, // 	规定要发送到服务器的数据
+                            async: true,
+                            dataType: "json",
+                            data: da,
                             contentType: 'application/json',
                             success: function () {
                                 layer.msg('删除成功', {icon: 6});
@@ -121,7 +118,7 @@
                                 });
                             },
                             error: function () {
-                                layer.msg('请求失败', {icon: 5})
+                                layer.msg('Request failed', {icon: 5})
                             }
                         });
                     });
@@ -139,13 +136,13 @@
             var data = obj.data;
             if (obj.event === 'del') {
                 var d = {'memberId': data.memberId};
-                layer.confirm('确定删除该会员？', function (index) {
+                layer.confirm('Deleted？', function (index) {
                     $.ajax({
                         type: "post",
                         url: "/member/delete",
-                        async: true, // 异步处理
-                        dataType: "json", // 预期的服务器响应的数据类型。
-                        data: JSON.stringify(d), // 	规定要发送到服务器的数据
+                        async: true,
+                        dataType: "json",
+                        data: JSON.stringify(d),
                         contentType: 'application/json',
                         success: function (result) {
                             console.log('delete succeed: ' + result);
@@ -158,7 +155,7 @@
                             }
                         },
                         error: function () {
-                            layer.msg('请求失败', {icon: 5})
+                            layer.msg('Request failed', {icon: 5})
                         }
                     });
                 });
@@ -218,13 +215,13 @@
     });
 
     function logout() {
-        layer.confirm('确定退出登录？', function () {
+        layer.confirm('log out？', function () {
             $.ajax({
                 type: "post",
                 url: "/user/logout",
-                async: true, // 异步处理
-                dataType: "json", // 预期的服务器响应的数据类型。
-                data: JSON.stringify('{}'), // 	规定要发送到服务器的数据
+                async: true,
+                dataType: "json",
+                data: JSON.stringify('{}'),
                 contentType: 'application/json',
                 success: function (result) {
                     console.log('logout succeed: ' + result);
@@ -235,7 +232,7 @@
                     }
                 },
                 error: function () {
-                    layer.msg('请求失败', {icon: 5})
+                    layer.msg('Request failed', {icon: 5})
                 }
             });
         });

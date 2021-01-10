@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <title>商家管理后台</title>
+    <title>Goods Management Backstage</title>
 
     <link rel="stylesheet" th:href="@{/static/res/layui/css/layui.css}" media="all"/>
     <link rel="stylesheet" th:href="@{/static/css/user.css}"/>
@@ -15,13 +15,13 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">商家后台管理系统</div>
-        <div class="div_center"><h2 class="nav_title">世纪华联</h2></div>
+        <div class="layui-logo">Goods Management Backstage</div>
+        <div class="div_center"><h2 class="nav_title">Supermarket</h2></div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
+                    <dd><a href="">Basic Information</a></dd>
+                    <dd><a href="">Security Configuration</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
@@ -30,47 +30,45 @@
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item">
-                    <a href="goods_main.html">商品管理</a>
+                    <a href="goods_main.html">Goods Management</a>
                 </li>
                 <li class="layui-nav-item layui-this layui-nav-itemed">
-                    <a href="category_main.html">分类管理</a>
+                    <a href="category_main.html">Category Management</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="member_main.html">会员管理</a>
+                    <a href="member_main.html">Member Management</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="store_main.html">店铺设置</a>
+                    <a href="store_main.html">Store Edit</a>
                 </li>
             </ul>
         </div>
     </div>
 
     <div class="layui-body main_body">
-        <!-- 内容主体区域 -->
-        <h1>分类管理</h1>
+        <h1>Category Management</h1>
         <hr/>
         <div>
             <div class="layui-form-item" style="margin-top: 20px">
-                <label class="layui-form-label">分类名称</label>
+                <label class="layui-form-label">Category Name</label>
                 <div class="layui-input-inline">
                     <input id='text_input_name' type="text" name="category_name" lay-verify="required"
                            autocomplete="off"
-                           class="layui-input input_box" placeholder="请输入分类名称"/>
+                           class="layui-input input_box" placeholder="Please enter a category name"/>
                 </div>
                 <div class="layui-input-inline" style="margin-left: 40px">
-                    <button id="btn_query" class="layui-btn">查询</button>
+                    <button id="btn_query" class="layui-btn">Inquire</button>
                 </div>
             </div>
 
-            <button id="btn_delete" data-type="deleteCats" class="layui-btn">删除</button>
-            <button id="btn_add" class="layui-btn">添加</button>
+            <button id="btn_delete" data-type="deleteCats" class="layui-btn">Delete</button>
+            <button id="btn_add" class="layui-btn">Add</button>
 
             <script type="text/html" id="category_operation">
-                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                <a class="layui-btn layui-btn-xs" lay-event="edit">Edit</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">Delete</a>
             </script>
 
             <table class="layui-hide" id="category" lay-filter="category_list"></table>
@@ -80,9 +78,8 @@
     </div>
 
     <div class="layui-footer">
-        <!-- 底部固定区域 -->
         <div style="text-align: center">
-            <a href="https://isuperqiang.github.io" target="_blank">© 落英坠露</a>
+            <a href="https://github.com/cheng-kun" target="_blank">© kun</a>
         </div>
     </div>
 </div>
@@ -97,21 +94,21 @@
         var table = layui.table;
 
         var $ = layui.$, active = {
-            deleteCats: function () { //获取选中数据
+            deleteCats: function () {
                 var checkStatus = table.checkStatus('render_cats')
                     , data = checkStatus.data;
                 if (data.length == 0) {
-                    layer.msg('请选择分类');
+                    layer.msg('Please select category');
                 } else {
-                    layer.confirm('确定删除这些分类？', function () {
+                    layer.confirm('Deleted？', function () {
                         var da = JSON.stringify(data);
                         console.log('da' + da);
                         $.ajax({
                             type: "post",
                             url: "/category/delete_bundle",
-                            async: true, // 异步处理
-                            dataType: "json", // 预期的服务器响应的数据类型。
-                            data: da, // 	规定要发送到服务器的数据
+                            async: true,
+                            dataType: "json",
+                            data: da,
                             contentType: 'application/json',
                             success: function () {
                                 layer.msg('删除成功', {icon: 6});
@@ -122,7 +119,7 @@
                                 });
                             },
                             error: function () {
-                                layer.msg('请求失败', {icon: 5})
+                                layer.msg('Request failed', {icon: 5})
                             }
                         });
                     });
@@ -141,13 +138,13 @@
             console.log('click:' + data.username + data.city);
             if (obj.event === 'del') {
                 var d = {'catId': data.catId};
-                layer.confirm('确定删除该分类？', function (index) {
+                layer.confirm('Deleted？', function (index) {
                     $.ajax({
                         type: "post",
                         url: "/category/delete",
-                        async: true, // 异步处理
-                        dataType: "json", // 预期的服务器响应的数据类型。
-                        data: JSON.stringify(d), // 	规定要发送到服务器的数据
+                        async: true,
+                        dataType: "json",
+                        data: JSON.stringify(d),
                         contentType: 'application/json',
                         success: function (result) {
                             console.log('delete succeed: ' + result);
@@ -160,7 +157,7 @@
                             }
                         },
                         error: function () {
-                            layer.msg('请求失败', {icon: 5})
+                            layer.msg('Request failed', {icon: 5})
                         }
                     });
                 });
@@ -174,14 +171,14 @@
                     $.ajax({
                         type: "post",
                         url: "/category/update",
-                        async: true, // 异步处理
-                        dataType: "json", // 预期的服务器响应的数据类型。
-                        data: JSON.stringify(cat), // 	规定要发送到服务器的数据
+                        async: true,
+                        dataType: "json",
+                        data: JSON.stringify(cat),
                         contentType: 'application/json',
                         success: function (result) {
                             console.log('edit succeed: ' + result);
                             if (result.status == 1) {
-                                layer.msg('修改成功', {icon: 6});
+                                layer.msg('changed successfully', {icon: 6});
                                 obj.update({
                                     'name': text
                                 });
@@ -190,7 +187,7 @@
                             }
                         },
                         error: function () {
-                            layer.msg('请求失败', {icon: 5})
+                            layer.msg('Request failed', {icon: 5})
                         }
                     });
                 });
@@ -249,9 +246,9 @@
                 $.ajax({
                     type: "post",
                     url: "/category/create",
-                    async: true, // 异步处理
-                    dataType: "json", // 预期的服务器响应的数据类型。
-                    data: JSON.stringify(cat), // 	规定要发送到服务器的数据
+                    async: true,
+                    dataType: "json",
+                    data: JSON.stringify(cat),
                     contentType: 'application/json',
                     success: function (result) {
                         console.log('query succeed: ' + result);
@@ -267,22 +264,22 @@
                         }
                     },
                     error: function () {
-                        layer.msg('请求失败', {icon: 5})
+                        layer.msg('Request failed', {icon: 5})
                     }
                 });
-                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                return false;
             });
         });
     });
 
     function logout() {
-        layer.confirm('确定退出登录？', function () {
+        layer.confirm('log out？', function () {
             $.ajax({
                 type: "post",
                 url: "/user/logout",
-                async: true, // 异步处理
-                dataType: "json", // 预期的服务器响应的数据类型。
-                data: JSON.stringify('{}'), // 	规定要发送到服务器的数据
+                async: true,
+                dataType: "json",
+                data: JSON.stringify('{}'),
                 contentType: 'application/json',
                 success: function (result) {
                     console.log('logout succeed: ' + result);
@@ -293,7 +290,7 @@
                     }
                 },
                 error: function () {
-                    layer.msg('请求失败', {icon: 5})
+                    layer.msg('Request failed', {icon: 5})
                 }
             });
         });

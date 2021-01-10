@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <title>商家管理后台</title>
+    <title>Goods Management Backstage</title>
     <link rel="stylesheet" th:href="@{/static/res/layui/css/layui.css}" media="all"/>
     <link rel="stylesheet" th:href="@{/static/css/user.css}"/>
     <script type="text/javascript" th:src="@{/static/res/layui/layui.js}" charset="utf-8"></script>
@@ -14,13 +14,13 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">商家后台管理系统</div>
+        <div class="layui-logo">Goods Management Backstage System</div>
         <div class="div_center"><h2 class="nav_title">世纪华联</h2></div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
+                    <dd><a href="">Basic Information</a></dd>
+                    <dd><a href="">Security Configuration</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item"><a href="javascript:;" onclick="logout()">退出</a></li>
@@ -29,19 +29,18 @@
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item">
-                    <a href="goods_main.html">商品管理</a>
+                    <a href="goods_main.html">Goods Management</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="category_main.html">分类管理</a>
+                    <a href="category_main.html">Category Management</a>
                 </li>
                 <li class="layui-nav-item layui-this layui-nav-itemed">
-                    <a href="member_main.html">会员管理</a>
+                    <a href="member_main.html">Member Management</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="store_edit.html">店铺设置</a>
+                    <a href="store_edit.html">Store Edit</a>
                 </li>
             </ul>
         </div>
@@ -53,7 +52,6 @@
         </a>
 
         <hr/>
-        <!-- 内容主体区域 -->
         <h1>编辑会员</h1>
         <hr/>
         <div>
@@ -96,8 +94,8 @@
 
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit="" lay-filter="confirm">确定</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        <button class="layui-btn" lay-submit="" lay-filter="confirm">Sure</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">Reset</button>
                     </div>
                 </div>
             </form>
@@ -105,9 +103,8 @@
     </div>
 
     <div class="layui-footer">
-        <!-- 底部固定区域 -->
         <div style="text-align: center">
-            <a href="https://isuperqiang.github.io" target="_blank">© 落英坠露</a>
+            <a href="https://github.com/cheng-kun" target="_blank">© kun</a>
         </div>
     </div>
 </div>
@@ -118,7 +115,6 @@
 
     layui.use('form', function () {
         var form = layui.form;
-        //监听提交
         form.on('submit(confirm)', function (data) {
             var message = JSON.stringify(data.field);
             console.log(message);
@@ -126,15 +122,14 @@
             $.ajax({
                 type: "post",
                 url: "/member/update",
-                async: true, // 异步处理
-                dataType: "json", // 预期的服务器响应的数据类型。
-                data: message, // 	规定要发送到服务器的数据
+                async: true,
+                dataType: "json",
+                data: message,
                 contentType: 'application/json',
                 success: function (result) {
                     console.log('update succeed: ' + result);
                     if (result.status == 1) {
-                        layer.msg('修改成功', {icon: 6}, function () {
-                            // 跳转
+                        layer.msg('changed successfully', {icon: 6}, function () {
                             location.href = '/member_main.html';
                         })
                     } else {
@@ -142,10 +137,10 @@
                     }
                 },
                 error: function () {
-                    layer.msg('请求失败', {icon: 5})
+                    layer.msg('Request failed', {icon: 5})
                 }
             });
-            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            return false;
         });
 
     });
@@ -153,13 +148,13 @@
     layui.use('layer');
 
     function logout() {
-        layer.confirm('确定退出登录？', function (index) {
+        layer.confirm('log out？', function (index) {
             $.ajax({
                 type: "post",
                 url: "/user/logout",
-                async: true, // 异步处理
-                dataType: "json", // 预期的服务器响应的数据类型。
-                data: JSON.stringify('{}'), // 	规定要发送到服务器的数据
+                async: true,
+                dataType: "json",
+                data: JSON.stringify('{}'),
                 contentType: 'application/json',
                 success: function (result) {
                     console.log('logout succeed: ' + result);
@@ -170,7 +165,7 @@
                     }
                 },
                 error: function () {
-                    layer.msg('请求失败', {icon: 5})
+                    layer.msg('Request failed', {icon: 5})
                 }
             });
         });
